@@ -1,0 +1,32 @@
+{
+  "name": "مِحراب الحُفّاظ — المصحف المحمدي والحزب الراتب",
+  "short_name": "محراب الحفاظ",
+  "description": "برنامج متكامل لمراجعة القرآن الكريم برواية ورش عن نافع من طريق الأزرق، يضم المصحف المحمدي بالوقف الهبطي وقراءة الحزب الراتب بالصيغة المغاربية.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0d3b2e",
+  "theme_color": "#0d3b2e",
+  "categories": [
+    "education",
+    "books",
+    "lifestyle"
+  ],
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

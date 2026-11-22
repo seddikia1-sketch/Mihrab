@@ -1,0 +1,2084 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>مِحراب الحُفّاظ — المصحف المحمدي والحزب الراتب</title>
+  <meta name="description" content="برنامج متكامل لمراجعة القرآن الكريم برواية ورش عن نافع — المصحف المحمدي بالوقف الهبطي، الحزب الراتب بالصيغة المغاربية، التلقين والتكرار، التدوير، وورد التدبر." />
+  <meta name="theme-color" content="#0d3b2e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="محراب الحفاظ" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png" />
+  <link rel="apple-touch-icon" href="./icon-192.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;800&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #f6f2e9;
+      --surface: #ffffff;
+      --surface-soft: #fbf8f1;
+      --primary: #0d3b2e;
+      --primary-light: #165947;
+      --gold: #c59b27;
+      --gold-dark: #9c7715;
+      --gold-soft: rgba(197, 155, 39, 0.14);
+      --crimson: #8e2424;
+      --text: #1c2421;
+      --muted: #5f6f68;
+      --border: #e5dec9;
+      --success: #1b7a56;
+      --danger: #b83b3b;
+      --shadow: 0 6px 20px rgba(13, 59, 46, 0.08);
+      --radius: 18px;
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-top: env(safe-area-inset-top, 0px);
+      --mushaf-font-size: 27px;
+    }
+
+    body.dark {
+      --bg: #0b1613;
+      --surface: #12231e;
+      --surface-soft: #172d27;
+      --primary: #1a6650;
+      --primary-light: #248066;
+      --gold: #e0b94b;
+      --gold-dark: #c9a137;
+      --gold-soft: rgba(224, 185, 75, 0.16);
+      --crimson: #e57373;
+      --text: #eef3f0;
+      --muted: #9ab0a7;
+      --border: #233c34;
+      --shadow: 0 6px 22px rgba(0, 0, 0, 0.38);
+    }
+
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(rgba(197, 155, 39, 0.1) 1px, transparent 1px),
+        radial-gradient(rgba(13, 59, 46, 0.05) 1px, transparent 1px);
+      background-size: 24px 24px;
+      background-position: 0 0, 12px 12px;
+      color: var(--text);
+      min-height: 100vh;
+      padding-bottom: calc(96px + var(--safe-bottom));
+      overscroll-behavior-y: none;
+    }
+
+    /* Header */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: linear-gradient(135deg, #0b3328 0%, #145342 100%);
+      color: #fff;
+      padding: calc(11px + var(--safe-top)) 14px 11px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+      border-bottom: 2px solid var(--gold);
+    }
+
+    .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .brand { display: flex; align-items: center; gap: 10px; }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: rgba(212, 175, 55, 0.18);
+      border: 1.5px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #f3d77c;
+      flex-shrink: 0;
+    }
+
+    .brand h1 { margin: 0; font-size: 16.5px; font-weight: 800; line-height: 1.2; }
+    .brand .sub { font-size: 10.5px; color: #e6d59c; font-weight: 600; }
+
+    .header-actions { display: flex; align-items: center; gap: 6px; }
+
+    .icon-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #installBtn {
+      display: none;
+      padding: 0 11px;
+      height: 36px;
+      border-radius: 11px;
+      border: 1px solid #f3d77c;
+      background: #c59b27;
+      color: #0b241c;
+      font-family: inherit;
+      font-weight: 800;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    /* Day Pills Bar */
+    .day-strip-wrap {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 9px 0;
+    }
+
+    .day-strip {
+      display: flex;
+      gap: 7px;
+      overflow-x: auto;
+      padding: 0 14px;
+      max-width: 760px;
+      margin: 0 auto;
+      scrollbar-width: none;
+    }
+    .day-strip::-webkit-scrollbar { display: none; }
+
+    .day-pill {
+      flex: 0 0 auto;
+      min-width: 54px;
+      height: 44px;
+      border-radius: 13px;
+      border: 1.5px solid var(--border);
+      background: var(--surface-soft);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+    }
+
+    .day-pill.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--gold);
+      box-shadow: 0 4px 10px rgba(13, 59, 46, 0.25);
+    }
+
+    .day-pill.done::after {
+      content: '✓';
+      font-size: 10px;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 13px;
+    }
+
+    .view { display: none; }
+    .view.active { display: block; animation: fadeIn 0.22s ease; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Hero Card */
+    .hero-card {
+      background: linear-gradient(135deg, #0d3b2e 0%, #175c49 100%);
+      color: #fff;
+      border-radius: 22px;
+      padding: 18px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-info h2 { margin: 0 0 6px; font-size: 17.5px; font-weight: 800; }
+    .hero-info p { margin: 0; font-size: 12px; color: #dcece6; line-height: 1.6; }
+
+    .streak-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(212, 175, 55, 0.2);
+      border: 1px solid rgba(243, 215, 124, 0.5);
+      color: #f8e39e;
+      font-size: 11.5px;
+      font-weight: 700;
+    }
+
+    .ring-wrap { position: relative; width: 76px; height: 76px; flex-shrink: 0; }
+    .ring-wrap svg { transform: rotate(-90deg); width: 76px; height: 76px; }
+    .ring-bg { fill: none; stroke: rgba(255,255,255,0.18); stroke-width: 7; }
+    .ring-fg { fill: none; stroke: #e6c153; stroke-width: 7; stroke-linecap: round; transition: stroke-dashoffset 0.4s ease; }
+    .ring-text {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 15.5px; color: #fff;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 15px;
+      margin-bottom: 13px;
+      box-shadow: var(--shadow);
+    }
+
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .card-title { display: flex; align-items: center; gap: 8px; }
+    .card h3 { margin: 0; font-size: 15px; font-weight: 800; }
+    .card-desc { margin: 0 0 11px; font-size: 12.8px; color: var(--muted); line-height: 1.65; }
+
+    .pill-badge {
+      background: var(--gold-soft);
+      color: var(--gold-dark);
+      border: 1px solid rgba(197, 155, 39, 0.35);
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    body.dark .pill-badge { color: #f0d27a; }
+
+    /* Segmented Tabs */
+    .seg-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      background: var(--surface-soft);
+      padding: 5px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+
+    .seg-btn {
+      min-height: 40px;
+      border: none;
+      border-radius: 10px;
+      background: transparent;
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .seg-btn.active {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 3px 8px rgba(13, 59, 46, 0.22);
+    }
+
+    /* Checkboxes */
+    .check-list { display: grid; gap: 8px; }
+    .check-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1.5px solid var(--border);
+      background: var(--surface-soft);
+      cursor: pointer;
+      min-height: 48px;
+      transition: 0.2s;
+    }
+
+    .check-item.checked {
+      border-color: var(--success);
+      background: rgba(27, 122, 86, 0.1);
+    }
+
+    .check-left { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; }
+    .check-box {
+      width: 24px; height: 24px; border-radius: 8px;
+      border: 2px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 14px; flex-shrink: 0;
+    }
+    .check-item.checked .check-box { background: var(--success); border-color: var(--success); }
+
+    .mini-action-btn {
+      border: 1px solid rgba(197, 155, 39, 0.5);
+      background: var(--gold-soft);
+      color: var(--primary);
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 5px 9px;
+      border-radius: 9px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    body.dark .mini-action-btn { color: #f0d27a; }
+
+    /* Buttons & Inputs */
+    .btn-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+
+    .btn {
+      min-height: 42px;
+      padding: 0 13px;
+      border-radius: 12px;
+      border: none;
+      font-family: inherit;
+      font-size: 12.8px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-gold { background: var(--gold); color: #11241c; }
+    .btn-success { background: var(--success); color: #fff; }
+    .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--text); }
+
+    select, input[type="number"], input[type="text"], textarea {
+      width: 100%;
+      padding: 10px 11px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border);
+      background: var(--surface-soft);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .field label { display: block; font-size: 11.5px; font-weight: 700; color: var(--muted); margin-bottom: 4px; }
+
+    /* =======================================================
+       AL-MUSHAF AL-MUHAMMADI (MAGHREBI ORNATE FRAME & PAPER)
+       ======================================================= */
+    .mushaf-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 8px 10px;
+      margin-bottom: 10px;
+    }
+
+    .tool-group { display: flex; align-items: center; gap: 5px; }
+    .tool-chip {
+      height: 34px;
+      padding: 0 10px;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .tool-chip.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--gold);
+    }
+
+    /* Authentic Muhammadi Mushaf Page Container */
+    .muhammadi-frame {
+      position: relative;
+      background: #fdf9ed;
+      color: #151a17;
+      border: 3px double #b88b1e;
+      border-radius: 18px;
+      padding: 16px 14px 20px;
+      margin-top: 10px;
+      box-shadow:
+        inset 0 0 0 4px rgba(197, 155, 39, 0.16),
+        inset 0 0 28px rgba(184, 139, 30, 0.1),
+        0 8px 22px rgba(13, 59, 46, 0.1);
+      transition: background 0.25s, color 0.25s;
+    }
+
+    .muhammadi-frame.paper-sepia {
+      background: #f4e7cb;
+      color: #241b0f;
+      border-color: #9e7316;
+    }
+
+    .muhammadi-frame.paper-night,
+    body.dark .muhammadi-frame:not(.paper-classic):not(.paper-sepia) {
+      background: #101f1a;
+      color: #f1ede0;
+      border-color: #8a6d20;
+      box-shadow: inset 0 0 0 4px rgba(212, 175, 55, 0.15);
+    }
+
+    .muhammadi-banner {
+      background: linear-gradient(90deg, rgba(13,59,46,0.08), rgba(197,155,39,0.22), rgba(13,59,46,0.08));
+      border-top: 2px solid #c59b27;
+      border-bottom: 2px solid #c59b27;
+      border-radius: 10px;
+      padding: 8px 12px;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+
+    .muhammadi-banner .title {
+      font-family: 'Amiri', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #0d3b2e;
+    }
+    .paper-night .muhammadi-banner .title,
+    body.dark .muhammadi-frame:not(.paper-classic):not(.paper-sepia) .muhammadi-banner .title {
+      color: #f3d77c;
+    }
+
+    .muhammadi-banner .meta {
+      font-size: 11px;
+      color: #7c5c10;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+    .paper-night .muhammadi-banner .meta,
+    body.dark .muhammadi-frame:not(.paper-classic):not(.paper-sepia) .muhammadi-banner .meta {
+      color: #d6c387;
+    }
+
+    /* Maghrebi Surah Ornamental Cartouche */
+    .surah-cartouche {
+      margin: 18px 0 12px;
+      padding: 9px 14px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(13,59,46,0.92), rgba(22,89,71,0.92));
+      border: 2px solid #d4af37;
+      color: #f9e7a8;
+      text-align: center;
+      font-family: 'Amiri', serif;
+      font-size: 21px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+    }
+
+    .quarter-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 16px 0 10px;
+      color: #9c7715;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .quarter-divider::before, .quarter-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #c59b27, transparent);
+    }
+    .paper-night .quarter-divider,
+    body.dark .muhammadi-frame:not(.paper-classic):not(.paper-sepia) .quarter-divider {
+      color: #f0d27a;
+    }
+
+    .ayah-block {
+      font-family: 'Scheherazade New', 'Amiri Quran', serif;
+      font-size: var(--mushaf-font-size);
+      line-height: 2.3;
+      text-align: justify;
+      direction: rtl;
+    }
+
+    .ayah-span {
+      padding: 2px 4px;
+      border-radius: 8px;
+      transition: background 0.25s, filter 0.25s;
+      cursor: pointer;
+    }
+
+    .ayah-span.active-ayah {
+      background: rgba(197, 155, 39, 0.32);
+      box-shadow: 0 0 0 2px rgba(197, 155, 39, 0.4);
+    }
+
+    .mushaf-hidden .ayah-span:not(.revealed) {
+      filter: blur(7px);
+      opacity: 0.38;
+      user-select: none;
+    }
+
+    .ayah-num {
+      font-family: 'Cairo', sans-serif;
+      font-size: 12.5px;
+      font-weight: 800;
+      color: #9c7715;
+      margin: 0 3px;
+      display: inline-block;
+    }
+    .paper-night .ayah-num,
+    body.dark .muhammadi-frame:not(.paper-classic):not(.paper-sepia) .ayah-num {
+      color: #f0d27a;
+    }
+
+    /* Maghrebi Waqf Al-Habti (ص) */
+    .habti {
+      color: #a92d2d;
+      font-family: 'Amiri', serif;
+      font-size: 0.72em;
+      font-weight: 700;
+      vertical-align: super;
+      margin: 0 2px;
+    }
+    .paper-night .habti,
+    body.dark .muhammadi-frame:not(.paper-classic):not(.paper-sepia) .habti {
+      color: #f5b942;
+    }
+
+    .sajda-mark {
+      color: #0d3b2e;
+      background: rgba(197, 155, 39, 0.25);
+      border-radius: 6px;
+      padding: 0 4px;
+      font-size: 0.8em;
+      margin: 0 2px;
+    }
+    .paper-night .sajda-mark,
+    body.dark .muhammadi-frame:not(.paper-classic):not(.paper-sepia) .sajda-mark {
+      color: #f3d77c;
+    }
+
+    /* Maghrebi Hizb Ratib Intro & Dua Cards */
+    .ratib-ritual-box {
+      background: linear-gradient(135deg, rgba(13, 59, 46, 0.06), rgba(197, 155, 39, 0.12));
+      border: 1.5px solid rgba(197, 155, 39, 0.55);
+      border-radius: 15px;
+      padding: 13px 14px;
+      margin: 10px 0;
+    }
+
+    .ratib-ritual-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    body.dark .ratib-ritual-title { color: #f0d27a; }
+
+    .ratib-dua-text {
+      font-family: 'Amiri', serif;
+      font-size: 19px;
+      line-height: 1.95;
+      margin: 0;
+      text-align: justify;
+    }
+
+    /* Collapsible details */
+    details.info-box {
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 10px 12px;
+      margin-top: 10px;
+      font-size: 12.5px;
+      line-height: 1.7;
+    }
+    details.info-box summary {
+      font-weight: 800;
+      cursor: pointer;
+      color: var(--primary);
+    }
+    body.dark details.info-box summary { color: #f0d27a; }
+
+    /* Tafsir Item */
+    .tafsir-item { border-bottom: 1px solid var(--border); padding: 12px 0; }
+    .tafsir-item:last-child { border-bottom: none; }
+    .tafsir-ayah {
+      font-family: 'Scheherazade New', 'Amiri Quran', serif;
+      font-size: 24px;
+      line-height: 2;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+    body.dark .tafsir-ayah { color: #f0d27a; }
+    .tafsir-text { font-size: 13.2px; line-height: 1.8; color: var(--text); margin: 0; }
+
+    /* 60 Hizb Matrix */
+    .hizb-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 10px;
+    }
+
+    .hizb-card {
+      background: var(--surface-soft);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .hizb-head-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .hizb-title { font-size: 12.5px; font-weight: 800; }
+    .hizb-open-btn {
+      border: none;
+      background: var(--gold-soft);
+      color: var(--primary);
+      border-radius: 7px;
+      padding: 2px 7px;
+      font-family: inherit;
+      font-size: 10.5px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    body.dark .hizb-open-btn { color: #f0d27a; }
+
+    .quarters-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
+    .q-btn {
+      height: 34px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .q-btn.s1 { background: rgba(197, 155, 39, 0.25); border-color: var(--gold); color: var(--text); }
+    .q-btn.s2 { background: var(--success); border-color: var(--success); color: #fff; }
+
+    /* Timer Pill */
+    .timer-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 10px 13px;
+      margin-top: 10px;
+    }
+    .timer-val { font-size: 20px; font-weight: 800; font-variant-numeric: tabular-nums; color: var(--primary); }
+    body.dark .timer-val { color: #f0d27a; }
+
+    /* Sticky Mini Audio Player */
+    .mini-player {
+      position: fixed;
+      left: 10px;
+      right: 10px;
+      bottom: calc(74px + var(--safe-bottom));
+      max-width: 740px;
+      margin: 0 auto;
+      background: #0d3b2e;
+      color: #fff;
+      border: 1.5px solid var(--gold);
+      border-radius: 16px;
+      padding: 9px 11px;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      z-index: 45;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.32);
+    }
+
+    .mini-player.show { display: flex; }
+    .mini-meta { min-width: 0; flex: 1; }
+    .mini-title { font-size: 12px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .mini-sub { font-size: 10.5px; color: #f3d77c; }
+    .mini-controls { display: flex; gap: 5px; }
+    .mini-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    /* Bottom Navigation (5 Tabs) */
+    .bottom-nav {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 50;
+      background: var(--surface);
+      border-top: 1.5px solid var(--border);
+      padding: 6px 6px calc(8px + var(--safe-bottom));
+      box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .nav-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 3px;
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 10.2px;
+      font-weight: 700;
+      padding: 6px 2px;
+      border-radius: 11px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .nav-btn .ico { font-size: 18px; line-height: 1; }
+    .nav-btn.active {
+      color: var(--primary);
+      background: var(--gold-soft);
+    }
+    body.dark .nav-btn.active { color: #f0d27a; }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      top: calc(74px + var(--safe-top));
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0d3b2e;
+      color: #fff;
+      border: 1px solid var(--gold);
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-size: 12.5px;
+      font-weight: 700;
+      z-index: 100;
+      display: none;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.28);
+      text-align: center;
+      max-width: 90vw;
+    }
+    .toast.show { display: block; }
+  </style>
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="header-row">
+      <div class="brand">
+        <div class="brand-icon">۞</div>
+        <div>
+          <h1>مِحراب الحُفّاظ</h1>
+          <div class="sub">المصحف المحمدي • الحزب الراتب • رواية ورش</div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="installBtn">تثبيت</button>
+        <button class="icon-btn" id="bookmarkJumpBtn" title="العودة للعلامة المرجعية" onclick="jumpToBookmark()">🔖</button>
+        <button class="icon-btn" id="themeToggle" title="الوضع الليلي">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="day-strip-wrap">
+    <div class="day-strip" id="dayStrip"></div>
+  </div>
+
+  <main class="container">
+    <!-- ==================== TAB 1: DAILY DASHBOARD ==================== -->
+    <section id="view-daily" class="view active">
+      <div class="hero-card">
+        <div class="hero-info">
+          <h2 id="dayTitle">اليوم 1 من الدورة</h2>
+          <p id="daySubtitle">حزبان راتب • ربع تلقين • 5 أحزاب تدوير • 7 آيات تدبر</p>
+          <div class="streak-badge">🔥 سلسلة المواظبة: <span id="streakCount">0</span> يوم</div>
+        </div>
+        <div class="ring-wrap">
+          <svg viewBox="0 0 80 80">
+            <circle class="ring-bg" cx="40" cy="40" r="33"></circle>
+            <circle class="ring-fg" id="progressRing" cx="40" cy="40" r="33" stroke-dasharray="207.3" stroke-dashoffset="207.3"></circle>
+          </svg>
+          <div class="ring-text" id="progressPct">0%</div>
+        </div>
+      </div>
+
+      <!-- Pillar 1: Hizb Ratib (Maghrebi Style) -->
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">
+            <span>🕌</span>
+            <h3>1. الحزب الراتب بالصيغة المغاربية</h3>
+          </div>
+          <span class="pill-badge" id="ratibBadge">حزب 1 و 2</span>
+        </div>
+        <p class="card-desc">حزب بعد صلاة الصبح وحزب بعد صلاة المغرب على طريقة مساجد الجزائر والمغرب لإتمام ختمة كل 30 يوماً.</p>
+        <div class="check-list">
+          <div class="check-item" data-task="ratib1">
+            <div class="check-left"><span class="check-box">✓</span><span id="ratibLabel1">حزب الصبح — الحزب 1</span></div>
+            <button class="mini-action-btn" onclick="event.stopPropagation(); openHizbInMushaf(getDayHizbs().h1, 'morning')">اقرأ الحزب 📖</button>
+          </div>
+          <div class="check-item" data-task="ratib2">
+            <div class="check-left"><span class="check-box">✓</span><span id="ratibLabel2">حزب المساء — الحزب 2</span></div>
+            <button class="mini-action-btn" onclick="event.stopPropagation(); openHizbInMushaf(getDayHizbs().h2, 'evening')">اقرأ الحزب 📖</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pillar 2: Talqeen -->
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">
+            <span>🎙️</span>
+            <h3>2. التلقين والتكرار (ربع حزب)</h3>
+          </div>
+          <span class="pill-badge" id="talqeenBadge">الربع 1</span>
+        </div>
+        <p class="card-desc">تثبيت ربع حزب بالتلقين والترديد خلف قارئ متقن برواية ورش من طريق الأزرق.</p>
+        <div class="check-list">
+          <div class="check-item" data-task="talqeen">
+            <div class="check-left"><span class="check-box">✓</span><span id="talqeenLabel">إتمام تثبيت الربع المقرر اليوم</span></div>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-gold" onclick="switchTab('talqeen')">فتح مصحف التلقين 🎧</button>
+        </div>
+      </div>
+
+      <!-- Pillar 3: Tadweer (5 Hizbs) -->
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">
+            <span>⚡</span>
+            <h3>3. مراجعة التدوير (5 أحزاب يومياً)</h3>
+          </div>
+          <span class="pill-badge" id="tadweerBadge">أحزاب 1 إلى 5</span>
+        </div>
+        <p class="card-desc">قراءة متوسطة (التدوير) لـ 5 أحزاب مقسمة على الصلوات الخمس لختم القرآن كل 12 يوماً.</p>
+        <div class="check-list" id="tadweerChecks"></div>
+        <div class="timer-bar">
+          <div>
+            <div style="font-size:11px;color:var(--muted);font-weight:700;">مؤقت التدوير (50 دقيقة)</div>
+            <div class="timer-val" id="tadweerTimer">50:00</div>
+          </div>
+          <div style="display:flex;gap:6px;">
+            <button class="btn btn-primary" id="timerToggleBtn" onclick="toggleTimer()">ابدأ</button>
+            <button class="btn btn-outline" onclick="resetTimer()">إعادة</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pillar 4: 7 Ayahs Tafsir & Tadabbur -->
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">
+            <span>🌿</span>
+            <h3>4. ورد الفهم والتدبر (7 آيات)</h3>
+          </div>
+          <span class="pill-badge" id="tadabburBadge">آيات 1–7</span>
+        </div>
+        <p class="card-desc">قراءة التفسير الميسر لـ 7 آيات متسلسلة يومياً مع استخراج فائدة عملية.</p>
+        <div class="check-list">
+          <div class="check-item" data-task="tadabbur">
+            <div class="check-left"><span class="check-box">✓</span><span>إتمام قراءة التفسير وتدوين فائدة اليوم</span></div>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary" onclick="loadDailyTafsir()">عرض الآيات السبع والتفسير 📖</button>
+        </div>
+        <div id="tafsirContainer" style="margin-top:12px;"></div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 2: AL-MUSHAF AL-MUHAMMADI & MAGHREBI HIZB RATIB ==================== -->
+    <section id="view-mushaf" class="view">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">
+            <span>📖</span>
+            <h3>المصحف المحمدي المغاربي</h3>
+          </div>
+          <span class="pill-badge">ورش • الوقف الهبطي (ص)</span>
+        </div>
+
+        <!-- Mode Switcher: Maghrebi Hizb Ratib vs Full Surah -->
+        <div class="seg-tabs">
+          <button class="seg-btn active" id="modeRatibBtn" onclick="setMushafMode('ratib')">🕌 الحزب الراتب (1–60)</button>
+          <button class="seg-btn" id="modeSurahBtn" onclick="setMushafMode('surah')">📜 تصفح بالسورة (114)</button>
+        </div>
+
+        <!-- MODE A: HIZB RATIB CONTROLS -->
+        <div id="mushafRatibControls">
+          <div class="grid-2" style="margin-bottom:9px;">
+            <div class="field">
+              <label>اختر الحزب (1 إلى 60)</label>
+              <select id="hizbSelect" onchange="loadMushafHizb(this.value)"></select>
+            </div>
+            <div class="field">
+              <label>قارئ الحزب الراتب (ورش)</label>
+              <select id="ratibReciterSelect">
+                <option value="warsh_yassin_al_jazaery_64kbps">الشيخ ياسين الجزائري (الجزائر)</option>
+                <option value="warsh_ibrahim_aldosary_128kbps">الشيخ إبراهيم الدوسري (ورش)</option>
+                <option value="warsh_Abdul_Basit_128kbps">الشيخ عبد الباسط (ورش)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid-2" style="margin-bottom:9px;">
+            <div class="field">
+              <label>سرعة التلاوة (المرتبة)</label>
+              <select id="ratibSpeedSelect" onchange="updateAudioSpeed()">
+                <option value="0.88">ترتيل متأنٍ (0.88x)</option>
+                <option value="1" selected>صيغة الحزب الراتب (1.0x)</option>
+                <option value="1.12">تدوير مغاربي (1.12x)</option>
+                <option value="1.25">حدر للمراجعة (1.25x)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>وِرد اليوم السريع</label>
+              <div style="display:flex;gap:5px;">
+                <button class="btn btn-outline" style="flex:1;min-height:40px;font-size:11.5px;padding:0 6px;" onclick="openHizbInMushaf(getDayHizbs().h1, 'morning')">🌅 الصبح</button>
+                <button class="btn btn-outline" style="flex:1;min-height:40px;font-size:11.5px;padding:0 6px;" onclick="openHizbInMushaf(getDayHizbs().h2, 'evening')">🌇 المساء</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="btn-row" style="margin-top:6px;">
+            <button class="btn btn-gold" style="flex:1;" onclick="startContinuousMushafAudio()">▶ تلاوة الحزب كاملاً</button>
+            <button class="btn btn-outline" onclick="saveMushafBookmark()">🔖 حفظ العلامة</button>
+            <button class="btn btn-outline" onclick="stepHizb(-1)">◀ السابق</button>
+            <button class="btn btn-outline" onclick="stepHizb(1)">التالي ▶</button>
+          </div>
+        </div>
+
+        <!-- MODE B: SURAH CONTROLS -->
+        <div id="mushafSurahControls" style="display:none;">
+          <div class="grid-2" style="margin-bottom:9px;">
+            <div class="field">
+              <label>اختر السورة (1 إلى 114)</label>
+              <select id="surahSelect" onchange="loadMushafSurah(this.value)"></select>
+            </div>
+            <div class="field">
+              <label>قارئ مغاربي (السورة كاملة - ورش)</label>
+              <select id="mushafMaghrebReciter">
+                <option value="https://server9.mp3quran.net/omar_warsh/">الشيخ عمر القزابري (المغرب)</option>
+                <option value="https://server11.mp3quran.net/koshi/">الشيخ العيون الكوشي (المغرب)</option>
+                <option value="https://server11.mp3quran.net/yassin/">الشيخ ياسين الجزائري (الجزائر)</option>
+                <option value="https://server6.mp3quran.net/bl3/Rewayat-Warsh-A-n-Nafi/">الشيخ رشيد بلعالية (الجزائر)</option>
+              </select>
+            </div>
+          </div>
+          <div class="btn-row" style="margin-top:6px;">
+            <button class="btn btn-gold" style="flex:1;" onclick="playMushafSurahFull()">🔊 استماع للسورة (قارئ مغاربي)</button>
+            <button class="btn btn-primary" onclick="startContinuousMushafAudio()">▶ تلاوة متزامنة بالآية</button>
+            <button class="btn btn-outline" onclick="saveMushafBookmark()">🔖 حفظ</button>
+          </div>
+          <audio id="mushafSurahAudio" controls style="width:100%;margin-top:9px;display:none;"></audio>
+        </div>
+
+        <!-- MUSHAF APPEARANCE TOOLBAR -->
+        <div class="mushaf-toolbar" style="margin-top:12px;">
+          <div class="tool-group">
+            <button class="tool-chip" onclick="changeFontSize(-2)">أ-</button>
+            <button class="tool-chip" onclick="changeFontSize(2)">أ+</button>
+            <button class="tool-chip" id="hideTextBtn" onclick="toggleHideMode()">👁️ تسميع</button>
+          </div>
+          <div class="tool-group">
+            <button class="tool-chip active" id="paper-classic" onclick="setPaper('classic')">كريمي</button>
+            <button class="tool-chip" id="paper-sepia" onclick="setPaper('sepia')">ورقي</button>
+            <button class="tool-chip" id="paper-night" onclick="setPaper('night')">ليلي</button>
+          </div>
+        </div>
+
+        <!-- MAGHREBI HIZB RATIB OPENING RITUAL -->
+        <div class="ratib-ritual-box" id="ratibIntroBox">
+          <div class="ratib-ritual-title">
+            <span>🌙 افتتاح الحزب الراتب بالصيغة المغاربية</span>
+            <span class="pill-badge">قبل القراءة</span>
+          </div>
+          <p class="ratib-dua-text" style="font-size:17.5px;">
+            أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ ۞ بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۞ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ... (يُستحب استحضار النية والخشوع والترتيل بتمهل واتزان على طريقة الحزب الراتب في مساجد المغرب العربي).
+          </p>
+        </div>
+
+        <!-- AUTHENTIC AL-MUSHAF AL-MUHAMMADI FRAME -->
+        <div class="muhammadi-frame paper-classic" id="muhammadiFrame">
+          <div class="muhammadi-banner">
+            <div class="title" id="muhammadiTitle">۞ الحزب 1 — المصحف المحمدي ۞</div>
+            <div class="meta" id="muhammadiMeta">رواية ورش عن نافع من طريق الأزرق • الرسم العثماني المغاربي والوقف الهبطي (ص)</div>
+          </div>
+          <div class="ayah-block" id="muhammadiContent">
+            جاري تحميل المصحف المحمدي برواية ورش عن نافع...
+          </div>
+        </div>
+
+        <!-- MAGHREBI HIZB RATIB CLOSING DUA -->
+        <div class="ratib-ritual-box" id="ratibDuaBox" style="margin-top:12px;">
+          <div class="ratib-ritual-title">
+            <span>🤲 دعاء ختم الحزب الراتب (الصيغة المغاربية)</span>
+            <span class="pill-badge">بعد إتمام الحزب</span>
+          </div>
+          <p class="ratib-dua-text">
+            صَدَقَ اللَّهُ الْعَظِيمُ، وَبَلَّغَ رَسُولُهُ الْكَرِيمُ، وَنَحْنُ عَلَىٰ ذَٰلِكَ مِنَ الشَّاهِدِينَ. اللَّهُمَّ انْفَعْنَا وَارْفَعْنَا بِالْقُرْآنِ الْعَظِيمِ، وَاجْعَلْهُ لَنَا إِمَاماً وَنُوراً وَهُدًى وَرَحْمَةً، اللَّهُمَّ ذَكِّرْنَا مِنْهُ مَا نَسِينَا، وَعَلِّمْنَا مِنْهُ مَا جَهِلْنَا، وَارْزُقْنَا تِلَاوَتَهُ آنَاءَ اللَّيْلِ وَأَطْرَافَ النَّهَارِ عَلَى الْوَجْهِ الَّذِي يُرْضِيكَ عَنَّا. سُبْحَانَ رَبِّكَ رَبِّ الْعِزَّةِ عَمَّا يَصِفُونَ، وَسَلَامٌ عَلَى الْمُرْسَلِينَ، وَالْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ.
+          </p>
+          <div class="btn-row">
+            <button class="btn btn-success" style="width:100%;" id="markHizbDoneBtn" onclick="markCurrentHizbRatibDone()">✓ أتممت قراءة هذا الحزب الراتب</button>
+          </div>
+        </div>
+
+        <!-- INFO ABOUT MUHAMMADI MUSHAF -->
+        <details class="info-box">
+          <summary>ℹ️ عن المصحف المحمدي والوقف الهبطي (ص) والحزب الراتب</summary>
+          <div style="margin-top:8px;">
+            • <strong>رواية ورش عن نافع من طريق الأزرق:</strong> الرواية المعتمدة في الجزائر والمغرب وشمال أفريقيا.<br/>
+            • <strong>الوقف الهبطي (ص):</strong> علامة الوقف التي وضعها الإمام محمد بن أبي جمعة الهبطي للتيسير على القارئ في الحزب الراتب والقراءة الجماعية.<br/>
+            • <strong>تقسيم الأحزاب (60 حزباً):</strong> يُقرأ حزبان كل يوم (حزب بعد الصبح وحزب بعد المغرب) فينختم القرآن الكريم كاملاً كل شهر.<br/>
+            • <strong>وضع التسميع (👁️):</strong> يخفي الآيات لتختبر حفظك، وعند النقر على أي آية تنكشف فوراً.
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 3: TALQEEN & REPETITION ==================== -->
+    <section id="view-talqeen" class="view">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title"><span>🎧</span><h3>مصحف التلقين والتكرار (ربع حزب)</h3></div>
+          <span class="pill-badge">ورش • الوقف الهبطي (ص)</span>
+        </div>
+
+        <div class="grid-2" style="margin-bottom:9px;">
+          <div class="field">
+            <label>رقم الربع (1 إلى 240)</label>
+            <input type="number" id="quarterInput" min="1" max="240" value="1" />
+          </div>
+          <div class="field">
+            <label>قارئ التلقين (بالآية - ورش)</label>
+            <select id="reciterSelect">
+              <option value="warsh_yassin_al_jazaery_64kbps">الشيخ ياسين الجزائري (الجزائر)</option>
+              <option value="warsh_ibrahim_aldosary_128kbps">الشيخ إبراهيم الدوسري (ورش)</option>
+              <option value="warsh_Abdul_Basit_128kbps">الشيخ عبد الباسط (ورش)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-bottom:9px;">
+          <div class="field">
+            <label>تكرار كل آية</label>
+            <select id="repeatSelect">
+              <option value="1">مرة واحدة</option>
+              <option value="3" selected>3 مرات</option>
+              <option value="5">5 مرات</option>
+              <option value="7">7 مرات</option>
+              <option value="10">10 مرات</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>وقفة الترديد خلف الشيخ</label>
+            <select id="pauseSelect">
+              <option value="0">بدون وقفة</option>
+              <option value="3" selected>3 ثوانٍ</option>
+              <option value="5">5 ثوانٍ</option>
+              <option value="8">8 ثوانٍ</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-primary" onclick="loadQuarter()">تحميل الربع</button>
+          <button class="btn btn-gold" onclick="startTalqeen()">▶ بدء التلقين والتكرار</button>
+          <button class="btn btn-outline" onclick="stopAllAudio()">⏹ إيقاف</button>
+        </div>
+
+        <!-- Maghrebi Full-Surah Listening Bar -->
+        <div style="margin-top:13px;padding-top:11px;border-top:1px dashed var(--border);">
+          <div style="font-size:11.5px;font-weight:800;color:var(--muted);margin-bottom:6px;">استماع للسورة كاملة (نخبة قراء الجزائر والمغرب برواية ورش):</div>
+          <div class="grid-2">
+            <select id="maghrebReciter">
+              <option value="https://server9.mp3quran.net/omar_warsh/">الشيخ عمر القزابري (المغرب)</option>
+              <option value="https://server11.mp3quran.net/koshi/">الشيخ العيون الكوشي (المغرب)</option>
+              <option value="https://server11.mp3quran.net/yassin/">الشيخ ياسين الجزائري (الجزائر)</option>
+              <option value="https://server6.mp3quran.net/bl3/Rewayat-Warsh-A-n-Nafi/">الشيخ رشيد بلعالية (الجزائر)</option>
+            </select>
+            <button class="btn btn-outline" onclick="playFullSurah()">🔊 استماع للسورة</button>
+          </div>
+          <audio id="surahAudio" controls style="width:100%;margin-top:8px;display:none;"></audio>
+        </div>
+
+        <div class="muhammadi-frame paper-classic" id="talqeenFrame">
+          <div class="muhammadi-banner">
+            <div class="title" id="mushafHeader">المصحف المحمدي — تلقين ربع الحزب</div>
+            <div class="meta">انقر على أي آية لبدء التلقين والتكرار منها مباشرة</div>
+          </div>
+          <div class="ayah-block" id="mushafText">اضغط على «تحميل الربع» لعرض الآيات الكريمة بالرسم العثماني المغاربي والوقف الهبطي (ص)...</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 4: 60 HIZB TRACKER ==================== -->
+    <section id="view-khatma" class="view">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title"><span>🗺️</span><h3>خريطة إتقان الـ 60 حزباً</h3></div>
+          <span class="pill-badge" id="khatmaStats">0 / 240 ربعاً</span>
+        </div>
+        <p class="card-desc">اضغط على رقم الربع لتحديث حالة إتقانه (أبيض ← ذهبي ← أخضر)، أو اضغط «اقرأ» لفتح الحزب مباشرة في المصحف المحمدي.</p>
+        <div class="hizb-grid" id="hizbGrid"></div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 5: TADABBUR JOURNAL ==================== -->
+    <section id="view-journal" class="view">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title"><span>✍️</span><h3>دفتر التدبر والفوائد</h3></div>
+          <button class="btn btn-outline" style="min-height:34px;font-size:12px;" onclick="exportNotes()">تصدير ⬇️</button>
+        </div>
+        <div class="field" style="margin-bottom:8px;">
+          <label>عنوان الفائدة أو الآية</label>
+          <input type="text" id="noteTitle" placeholder="مثال: تدبر قوله تعالى في سورة البقرة..." />
+        </div>
+        <div class="field" style="margin-bottom:10px;">
+          <label>الخاطرة والتطبيق العملي</label>
+          <textarea id="noteBody" rows="3" placeholder="اكتب ما فتح الله به عليك من فهم أو عمل..."></textarea>
+        </div>
+        <button class="btn btn-primary" style="width:100%;" onclick="saveNote()">حفظ في الدفتر</button>
+      </div>
+
+      <div class="card">
+        <input type="text" id="noteSearch" placeholder="🔍 ابحث في فوائدك..." oninput="renderNotes()" style="margin-bottom:12px;" />
+        <div id="notesList"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Sticky Unified Mini Audio Player -->
+  <div class="mini-player" id="miniPlayer">
+    <div class="mini-meta">
+      <div class="mini-title" id="miniTitle">جاري التلاوة...</div>
+      <div class="mini-sub" id="miniSub">رواية ورش عن نافع</div>
+    </div>
+    <div class="mini-controls">
+      <button class="mini-btn" onclick="prevAudioAyah()">⏮</button>
+      <button class="mini-btn" id="miniPlayBtn" onclick="toggleAudioPause()">⏸</button>
+      <button class="mini-btn" onclick="nextAudioAyah()">⏭</button>
+      <button class="mini-btn" onclick="stopAllAudio()">✕</button>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation (5 Tabs) -->
+  <nav class="bottom-nav">
+    <div class="nav-inner">
+      <button class="nav-btn active" data-tab="daily" onclick="switchTab('daily')">
+        <span class="ico">🕌</span><span>الورد</span>
+      </button>
+      <button class="nav-btn" data-tab="mushaf" onclick="switchTab('mushaf')">
+        <span class="ico">📖</span><span>المصحف</span>
+      </button>
+      <button class="nav-btn" data-tab="talqeen" onclick="switchTab('talqeen')">
+        <span class="ico">🎧</span><span>التلقين</span>
+      </button>
+      <button class="nav-btn" data-tab="khatma" onclick="switchTab('khatma')">
+        <span class="ico">🗺️</span><span>الختمة</span>
+      </button>
+      <button class="nav-btn" data-tab="journal" onclick="switchTab('journal')">
+        <span class="ico">✍️</span><span>التدبر</span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // --- 114 SURAH NAMES ---
+    const SURAH_NAMES = [
+      "الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس",
+      "هود","يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه",
+      "الأنبياء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم",
+      "لقمان","السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر",
+      "فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح","الحجرات","ق",
+      "الذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة","الحشر","الممتحنة",
+      "الصف","الجمعة","المنافقون","التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج",
+      "نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ","النازعات","عبس",
+      "التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد",
+      "الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات",
+      "القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر",
+      "المسد","الإخلاص","الفلق","الناس"
+    ];
+
+    // --- STATE & STORAGE ---
+    const STORAGE_KEY = 'mihrab_alhuffaz_warsh_v1';
+    let state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    if (!state.currentDay) state.currentDay = 1;
+    if (!state.days) state.days = {};
+    if (!state.quarters) state.quarters = {};
+    if (!state.notes) state.notes = [];
+    if (typeof state.dark !== 'boolean') state.dark = false;
+    if (!state.fontSize) state.fontSize = 27;
+    if (!state.paper) state.paper = 'classic';
+    if (!state.bookmark) state.bookmark = { mode: 'ratib', value: 1 };
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+    }
+
+    function pad3(n) { return String(n).padStart(3, '0'); }
+
+    // --- THEME & MUSHAF PREFERENCES ---
+    function applyPrefs() {
+      document.body.classList.toggle('dark', state.dark);
+      document.getElementById('themeToggle').textContent = state.dark ? '☀️' : '🌙';
+      document.documentElement.style.setProperty('--mushaf-font-size', state.fontSize + 'px');
+      setPaper(state.paper, false);
+    }
+
+    document.getElementById('themeToggle').onclick = () => {
+      state.dark = !state.dark;
+      if (state.dark && state.paper === 'classic') state.paper = 'night';
+      if (!state.dark && state.paper === 'night') state.paper = 'classic';
+      saveState();
+      applyPrefs();
+    };
+
+    function changeFontSize(delta) {
+      state.fontSize = Math.max(20, Math.min(40, state.fontSize + delta));
+      document.documentElement.style.setProperty('--mushaf-font-size', state.fontSize + 'px');
+      saveState();
+    }
+
+    function setPaper(paper, persist = true) {
+      state.paper = paper;
+      ['muhammadiFrame', 'talqeenFrame'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.classList.remove('paper-classic', 'paper-sepia', 'paper-night');
+        el.classList.add('paper-' + paper);
+      });
+      ['classic', 'sepia', 'night'].forEach(p => {
+        const b = document.getElementById('paper-' + p);
+        if (b) b.classList.toggle('active', p === paper);
+      });
+      if (persist) saveState();
+    }
+
+    let hideMode = false;
+    function toggleHideMode() {
+      hideMode = !hideMode;
+      document.getElementById('muhammadiFrame').classList.toggle('mushaf-hidden', hideMode);
+      document.getElementById('hideTextBtn').classList.toggle('active', hideMode);
+      if (hideMode) showToast('وضع التسميع مُفعّل — انقر على الآية لكشفها 👁️');
+    }
+
+    // --- NAVIGATION ---
+    function switchTab(tab) {
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+      document.getElementById('view-' + tab).classList.add('active');
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (tab === 'mushaf' && mushafAyahs.length === 0) {
+        loadMushafHizb(getDayHizbs().h1);
+      }
+      if (tab === 'talqeen' && talqeenAyahs.length === 0) loadQuarter();
+      if (tab === 'khatma') renderHizbGrid();
+      if (tab === 'journal') renderNotes();
+    }
+
+    // --- DAY STRIP & DAILY PROGRAM ---
+    const PRAYERS = ['الفجر', 'الظهر', 'العصر', 'المغرب', 'العشاء'];
+
+    function getDayHizbs() {
+      const h1 = (state.currentDay - 1) * 2 + 1;
+      return { h1, h2: h1 + 1 };
+    }
+
+    function getDayData(day) {
+      if (!state.days[day]) state.days[day] = {};
+      return state.days[day];
+    }
+
+    function isDayComplete(day) {
+      const d = state.days[day] || {};
+      const keys = ['ratib1', 'ratib2', 'talqeen', 'tadabbur', 'tad0', 'tad1', 'tad2', 'tad3', 'tad4'];
+      return keys.every(k => d[k]);
+    }
+
+    function renderDayStrip() {
+      const strip = document.getElementById('dayStrip');
+      strip.innerHTML = '';
+      for (let i = 1; i <= 30; i++) {
+        const btn = document.createElement('button');
+        btn.className = 'day-pill' + (i === state.currentDay ? ' active' : '') + (isDayComplete(i) ? ' done' : '');
+        btn.innerHTML = `<span>يوم</span><span>${i}</span>`;
+        btn.onclick = () => {
+          state.currentDay = i;
+          saveState();
+          renderDayStrip();
+          renderDashboard();
+        };
+        strip.appendChild(btn);
+      }
+      const activePill = strip.querySelector('.active');
+      if (activePill) activePill.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+
+    function renderDashboard() {
+      const day = state.currentDay;
+      const d = getDayData(day);
+
+      document.getElementById('dayTitle').textContent = `اليوم ${day} من الدورة الشهرية`;
+
+      // Pillar 1: 2 Hizbs Ratib
+      const { h1, h2 } = getDayHizbs();
+      document.getElementById('ratibBadge').textContent = `حزب ${h1} و ${h2}`;
+      document.getElementById('ratibLabel1').textContent = `حزب الصبح (بعد الفجر) — الحزب ${h1}`;
+      document.getElementById('ratibLabel2').textContent = `حزب المساء (بعد المغرب) — الحزب ${h2}`;
+
+      // Pillar 2: 1 Quarter Talqeen
+      document.getElementById('talqeenBadge').textContent = `الربع ${day}`;
+      document.getElementById('talqeenLabel').textContent = `تثبيت الربع ${day} بالتلقين والتكرار`;
+      document.getElementById('quarterInput').value = day;
+
+      // Pillar 3: 5 Hizbs Tadweer (12-day cycle)
+      const tStart = (((day - 1) * 5) % 60) + 1;
+      const tEnd = tStart + 4;
+      document.getElementById('tadweerBadge').textContent = `أحزاب ${tStart} إلى ${tEnd}`;
+      const tWrap = document.getElementById('tadweerChecks');
+      tWrap.innerHTML = '';
+      for (let i = 0; i < 5; i++) {
+        const hNum = tStart + i;
+        const key = 'tad' + i;
+        const div = document.createElement('div');
+        div.className = 'check-item' + (d[key] ? ' checked' : '');
+        div.innerHTML = `
+          <div class="check-left"><span class="check-box">✓</span><span>الحزب ${hNum} (بعد ${PRAYERS[i]})</span></div>
+          <button class="mini-action-btn" onclick="event.stopPropagation(); openHizbInMushaf(${hNum}, 'tadweer')">المصحف 📖</button>
+        `;
+        div.onclick = () => toggleTask(key);
+        tWrap.appendChild(div);
+      }
+
+      // Pillar 4: 7 Ayahs Tafsir
+      const aStart = (day - 1) * 7 + 1;
+      const aEnd = aStart + 6;
+      document.getElementById('tadabburBadge').textContent = `الآيات ${aStart}–${aEnd}`;
+      document.getElementById('tafsirContainer').innerHTML = '';
+
+      // Bind static check-items
+      document.querySelectorAll('#view-daily .check-item[data-task]').forEach(el => {
+        const k = el.dataset.task;
+        el.classList.toggle('checked', !!d[k]);
+        el.onclick = () => toggleTask(k);
+      });
+
+      updateProgress();
+    }
+
+    function toggleTask(key) {
+      const d = getDayData(state.currentDay);
+      d[key] = !d[key];
+      saveState();
+      renderDashboard();
+      renderDayStrip();
+    }
+
+    function updateProgress() {
+      const d = getDayData(state.currentDay);
+      const keys = ['ratib1', 'ratib2', 'talqeen', 'tadabbur', 'tad0', 'tad1', 'tad2', 'tad3', 'tad4'];
+      const done = keys.filter(k => d[k]).length;
+      const pct = Math.round((done / keys.length) * 100);
+      document.getElementById('progressPct').textContent = pct + '%';
+      const circ = 207.3;
+      document.getElementById('progressRing').style.strokeDashoffset = circ - (circ * pct / 100);
+
+      let streak = 0;
+      for (let i = 1; i <= 30; i++) {
+        if (isDayComplete(i)) streak++;
+      }
+      document.getElementById('streakCount').textContent = streak;
+    }
+
+    // --- TADWEER TIMER ---
+    let timerSec = 50 * 60;
+    let timerInt = null;
+
+    function updateTimerDisplay() {
+      const m = String(Math.floor(timerSec / 60)).padStart(2, '0');
+      const s = String(timerSec % 60).padStart(2, '0');
+      document.getElementById('tadweerTimer').textContent = `${m}:${s}`;
+    }
+
+    function toggleTimer() {
+      const btn = document.getElementById('timerToggleBtn');
+      if (timerInt) {
+        clearInterval(timerInt);
+        timerInt = null;
+        btn.textContent = 'متابعة';
+      } else {
+        btn.textContent = 'إيقاف مؤقت';
+        timerInt = setInterval(() => {
+          if (timerSec > 0) {
+            timerSec--;
+            updateTimerDisplay();
+          } else {
+            clearInterval(timerInt);
+            timerInt = null;
+            showToast('أحسنت! انتهى وقت ورد التدوير 🎉');
+          }
+        }, 1000);
+      }
+    }
+
+    function resetTimer() {
+      clearInterval(timerInt);
+      timerInt = null;
+      timerSec = 50 * 60;
+      document.getElementById('timerToggleBtn').textContent = 'ابدأ';
+      updateTimerDisplay();
+    }
+
+    // --- FORMAT WARSH & WAQF HABTI ---
+    function formatHabti(text) {
+      return text.replace(/[ۖۗۘۙۚۛ]/g, ' <span class="habti" title="وقف هبطي">ص</span> ');
+    }
+
+    function sajdaBadge(ayah) {
+      return ayah.sajda ? ' <span class="sajda-mark" title="موضع سجدة">۩</span>' : '';
+    }
+
+    // --- POPULATE HIZB (1-60) & SURAH (1-114) SELECTORS ---
+    function initMushafSelectors() {
+      const hSel = document.getElementById('hizbSelect');
+      hSel.innerHTML = '';
+      for (let h = 1; h <= 60; h++) {
+        const dayNum = Math.ceil(h / 2);
+        const period = h % 2 === 1 ? 'صبح' : 'مساء';
+        const opt = document.createElement('option');
+        opt.value = h;
+        opt.textContent = `الحزب ${h} (اليوم ${dayNum} - ${period})`;
+        hSel.appendChild(opt);
+      }
+
+      const sSel = document.getElementById('surahSelect');
+      sSel.innerHTML = '';
+      SURAH_NAMES.forEach((name, idx) => {
+        const opt = document.createElement('option');
+        opt.value = idx + 1;
+        opt.textContent = `${idx + 1}. سورة ${name}`;
+        sSel.appendChild(opt);
+      });
+    }
+
+    // --- AL-MUSHAF AL-MUHAMMADI & MAGHREBI HIZB RATIB ENGINE ---
+    let mushafMode = 'ratib'; // 'ratib' | 'surah'
+    let currentMushafHizb = 1;
+    let currentMushafSurah = 1;
+    let mushafAyahs = [];
+
+    function setMushafMode(mode) {
+      mushafMode = mode;
+      document.getElementById('modeRatibBtn').classList.toggle('active', mode === 'ratib');
+      document.getElementById('modeSurahBtn').classList.toggle('active', mode === 'surah');
+      document.getElementById('mushafRatibControls').style.display = mode === 'ratib' ? 'block' : 'none';
+      document.getElementById('mushafSurahControls').style.display = mode === 'surah' ? 'block' : 'none';
+      document.getElementById('ratibIntroBox').style.display = mode === 'ratib' ? 'block' : 'none';
+      document.getElementById('ratibDuaBox').style.display = mode === 'ratib' ? 'block' : 'none';
+
+      if (mode === 'ratib') {
+        loadMushafHizb(currentMushafHizb);
+      } else {
+        loadMushafSurah(currentMushafSurah);
+      }
+    }
+
+    function openHizbInMushaf(hizbNum, context) {
+      currentMushafHizb = Math.max(1, Math.min(60, parseInt(hizbNum, 10) || 1));
+      switchTab('mushaf');
+      setMushafMode('ratib');
+      document.getElementById('hizbSelect').value = currentMushafHizb;
+      if (context === 'morning') showToast(`حزب الصبح (بعد الفجر) — الحزب ${currentMushafHizb} 🌅`);
+      else if (context === 'evening') showToast(`حزب المساء (بعد المغرب) — الحزب ${currentMushafHizb} 🌇`);
+    }
+
+    function stepHizb(delta) {
+      const next = Math.max(1, Math.min(60, currentMushafHizb + delta));
+      document.getElementById('hizbSelect').value = next;
+      loadMushafHizb(next);
+    }
+
+    async function fetchQuarterData(q) {
+      let res = await fetch(`https://api.alquran.cloud/v1/hizbQuarter/${q}/quran-warsh`);
+      let json = await res.json();
+      if (json.code !== 200 || !json.data || !json.data.ayahs) {
+        res = await fetch(`https://api.alquran.cloud/v1/hizbQuarter/${q}/quran-uthmani`);
+        json = await res.json();
+      }
+      return json.data.ayahs;
+    }
+
+    async function loadMushafHizb(hizbNum) {
+      stopAllAudio();
+      currentMushafHizb = Math.max(1, Math.min(60, parseInt(hizbNum, 10) || 1));
+      document.getElementById('hizbSelect').value = currentMushafHizb;
+
+      const contentEl = document.getElementById('muhammadiContent');
+      const titleEl = document.getElementById('muhammadiTitle');
+      const metaEl = document.getElementById('muhammadiMeta');
+
+      const dayNum = Math.ceil(currentMushafHizb / 2);
+      const periodText = currentMushafHizb % 2 === 1 ? 'حزب الصبح (بعد الفجر)' : 'حزب المساء (بعد المغرب)';
+      titleEl.textContent = `۞ الحزب ${currentMushafHizb} — ${periodText} ۞`;
+      metaEl.textContent = `المصحف المحمدي • رواية ورش عن نافع من طريق الأزرق • الوقف الهبطي (ص)`;
+      contentEl.innerHTML = '<div style="text-align:center;padding:24px;font-family:Cairo,sans-serif;font-size:14px;">جاري تحميل الحزب كاملاً (4 أرباع) برواية ورش...</div>';
+
+      const baseQ = (currentMushafHizb - 1) * 4 + 1;
+      const quarterLabels = [
+        `۞ بداية الحزب ${currentMushafHizb} (الربع الأول)`,
+        `الربع الثاني من الحزب ${currentMushafHizb}`,
+        `۞ نصف الحزب ${currentMushafHizb} (الربع الثالث)`,
+        `الربع الرابع من الحزب ${currentMushafHizb}`
+      ];
+
+      try {
+        const quartersAyahs = await Promise.all([
+          fetchQuarterData(baseQ),
+          fetchQuarterData(baseQ + 1),
+          fetchQuarterData(baseQ + 2),
+          fetchQuarterData(baseQ + 3)
+        ]);
+
+        mushafAyahs = [];
+        let html = '';
+        let lastSurahNum = -1;
+
+        quartersAyahs.forEach((qList, qIdx) => {
+          html += `<div class="quarter-divider">${quarterLabels[qIdx]}</div>`;
+          qList.forEach(a => {
+            const globalIdx = mushafAyahs.length;
+            mushafAyahs.push(a);
+
+            if (a.surah.number !== lastSurahNum) {
+              lastSurahNum = a.surah.number;
+              html += `<div class="surah-cartouche">۞ ${a.surah.name} ۞</div>`;
+            }
+
+            html += `<span class="ayah-span" id="mushaf-ayah-${globalIdx}" onclick="onMushafAyahTap(${globalIdx})">${formatHabti(a.text)}${sajdaBadge(a)} <span class="ayah-num">﴿${a.numberInSurah}﴾</span></span> `;
+          });
+        });
+
+        contentEl.innerHTML = html;
+        const firstSurah = mushafAyahs[0]?.surah?.name || '';
+        const lastSurah = mushafAyahs[mushafAyahs.length - 1]?.surah?.name || '';
+        const rangeLabel = firstSurah === lastSurah ? firstSurah : `${firstSurah} — ${lastSurah}`;
+        metaEl.textContent = `${rangeLabel} • اليوم ${dayNum} • رواية ورش والوقف الهبطي (ص)`;
+      } catch (e) {
+        contentEl.innerHTML = '<div style="text-align:center;padding:18px;font-family:Cairo,sans-serif;font-size:13.5px;color:var(--danger);">تعذر تحميل الحزب. تحقق من الاتصال بالإنترنت ثم أعد المحاولة.</div>';
+      }
+    }
+
+    async function loadMushafSurah(surahNum) {
+      stopAllAudio();
+      currentMushafSurah = Math.max(1, Math.min(114, parseInt(surahNum, 10) || 1));
+      document.getElementById('surahSelect').value = currentMushafSurah;
+
+      const contentEl = document.getElementById('muhammadiContent');
+      const titleEl = document.getElementById('muhammadiTitle');
+      const metaEl = document.getElementById('muhammadiMeta');
+
+      titleEl.textContent = `۞ سورة ${SURAH_NAMES[currentMushafSurah - 1]} ۞`;
+      metaEl.textContent = 'المصحف المحمدي • رواية ورش عن نافع • الوقف الهبطي (ص)';
+      contentEl.innerHTML = '<div style="text-align:center;padding:24px;font-family:Cairo,sans-serif;font-size:14px;">جاري تحميل السورة برواية ورش...</div>';
+
+      try {
+        let res = await fetch(`https://api.alquran.cloud/v1/surah/${currentMushafSurah}/quran-warsh`);
+        let json = await res.json();
+        if (json.code !== 200 || !json.data || !json.data.ayahs) {
+          res = await fetch(`https://api.alquran.cloud/v1/surah/${currentMushafSurah}/quran-uthmani`);
+          json = await res.json();
+        }
+        const sData = json.data;
+        mushafAyahs = sData.ayahs.map(a => ({
+          ...a,
+          surah: { number: sData.number, name: sData.name }
+        }));
+
+        const revType = sData.revelationType === 'Meccan' ? 'مكية' : 'مدنية';
+        metaEl.textContent = `${revType} • عدد آياتها ${sData.numberOfAyahs} • رواية ورش والوقف الهبطي (ص)`;
+
+        let html = `<div class="surah-cartouche">۞ ${sData.name} ۞</div>`;
+        mushafAyahs.forEach((a, idx) => {
+          html += `<span class="ayah-span" id="mushaf-ayah-${idx}" onclick="onMushafAyahTap(${idx})">${formatHabti(a.text)}${sajdaBadge(a)} <span class="ayah-num">﴿${a.numberInSurah}﴾</span></span> `;
+        });
+        contentEl.innerHTML = html;
+      } catch (e) {
+        contentEl.innerHTML = '<div style="text-align:center;padding:18px;font-family:Cairo,sans-serif;font-size:13.5px;color:var(--danger);">تعذر تحميل السورة. تحقق من الاتصال بالإنترنت.</div>';
+      }
+    }
+
+    function onMushafAyahTap(idx) {
+      if (hideMode) {
+        const el = document.getElementById('mushaf-ayah-' + idx);
+        if (el) el.classList.toggle('revealed');
+        return;
+      }
+      startContinuousMushafAudio(idx);
+    }
+
+    function saveMushafBookmark() {
+      state.bookmark = {
+        mode: mushafMode,
+        value: mushafMode === 'ratib' ? currentMushafHizb : currentMushafSurah
+      };
+      saveState();
+      const label = mushafMode === 'ratib' ? `الحزب ${currentMushafHizb}` : `سورة ${SURAH_NAMES[currentMushafSurah - 1]}`;
+      showToast(`تم حفظ العلامة المرجعية عند ${label} 🔖`);
+    }
+
+    function jumpToBookmark() {
+      const bm = state.bookmark || { mode: 'ratib', value: 1 };
+      switchTab('mushaf');
+      if (bm.mode === 'surah') {
+        currentMushafSurah = bm.value;
+        setMushafMode('surah');
+      } else {
+        currentMushafHizb = bm.value;
+        setMushafMode('ratib');
+      }
+      showToast('تم الانتقال إلى علامتك المرجعية 🔖');
+    }
+
+    function markCurrentHizbRatibDone() {
+      const { h1, h2 } = getDayHizbs();
+      const d = getDayData(state.currentDay);
+      if (currentMushafHizb === h1) {
+        d.ratib1 = true;
+        saveState();
+        renderDashboard();
+        renderDayStrip();
+        showToast(`بارك الله فيك! تم تسجيل إتمام حزب الصبح (الحزب ${h1}) ✓`);
+      } else if (currentMushafHizb === h2) {
+        d.ratib2 = true;
+        saveState();
+        renderDashboard();
+        renderDayStrip();
+        showToast(`بارك الله فيك! تم تسجيل إتمام حزب المساء (الحزب ${h2}) ✓`);
+      } else {
+        // Also mark its 4 quarters as reviewed (state 1) if untouched
+        const baseQ = (currentMushafHizb - 1) * 4 + 1;
+        for (let i = 0; i < 4; i++) {
+          if (!state.quarters[baseQ + i]) state.quarters[baseQ + i] = 1;
+        }
+        saveState();
+        showToast(`تقبل الله! تم تسجيل قراءة الحزب ${currentMushafHizb} في متتبع الختمة ✓`);
+      }
+    }
+
+    function playMushafSurahFull() {
+      stopAllAudio();
+      const base = document.getElementById('mushafMaghrebReciter').value;
+      const player = document.getElementById('mushafSurahAudio');
+      player.style.display = 'block';
+      player.src = `${base}${pad3(currentMushafSurah)}.mp3`;
+      player.play().catch(() => showToast('اضغط على زر التشغيل في المشغل أدناه'));
+    }
+
+    // --- UNIFIED AUDIO ENGINE (SUPPORTS BOTH MUSHAF HIZB RATIB & TALQEEN) ---
+    let activeAudioContext = null; // 'mushaf' | 'talqeen'
+    let audioIdx = 0;
+    let audioRep = 1;
+    let isAudioPlaying = false;
+    let pauseTimeout = null;
+    const audioPlayer = new Audio();
+
+    function updateAudioSpeed() {
+      const speed = parseFloat(document.getElementById('ratibSpeedSelect').value || '1');
+      if (activeAudioContext === 'mushaf') {
+        audioPlayer.playbackRate = speed;
+      }
+    }
+
+    function startContinuousMushafAudio(startIdx = 0) {
+      if (!mushafAyahs.length) return showToast('انتظر تحميل النص القرآني أولاً');
+      stopAllAudio();
+      activeAudioContext = 'mushaf';
+      audioIdx = startIdx;
+      audioRep = 1;
+      isAudioPlaying = true;
+      document.getElementById('miniPlayer').classList.add('show');
+      playUnifiedAyah();
+    }
+
+    // --- TALQEEN TAB ENGINE ---
+    let talqeenAyahs = [];
+    let currentTalqeenSurah = 1;
+
+    async function loadQuarter() {
+      const q = Math.max(1, Math.min(240, parseInt(document.getElementById('quarterInput').value || '1', 10)));
+      document.getElementById('mushafText').innerHTML = 'جاري تحميل الربع برواية ورش عن نافع...';
+      try {
+        talqeenAyahs = await fetchQuarterData(q);
+        currentTalqeenSurah = talqeenAyahs[0].surah.number;
+        const hizbNum = Math.ceil(q / 4);
+        const qInHizb = ((q - 1) % 4) + 1;
+        const qNames = ['الأول', 'الثاني', 'الثالث', 'الرابع'];
+        document.getElementById('mushafHeader').textContent =
+          `۞ الحزب ${hizbNum} — الربع ${qNames[qInHizb - 1]} (${talqeenAyahs[0].surah.name}) ۞`;
+
+        const html = talqeenAyahs.map((a, idx) =>
+          `<span class="ayah-span" id="talqeen-ayah-${idx}" onclick="startTalqeen(${idx})">${formatHabti(a.text)}${sajdaBadge(a)} <span class="ayah-num">﴿${a.numberInSurah}﴾</span></span> `
+        ).join('');
+        document.getElementById('mushafText').innerHTML = html;
+      } catch (e) {
+        document.getElementById('mushafText').innerHTML = 'تعذر الاتصال بالإنترنت لتحميل الربع. تأكد من الاتصال ثم أعد المحاولة.';
+      }
+    }
+
+    function startTalqeen(startIdx = null) {
+      if (!talqeenAyahs.length) {
+        loadQuarter().then(() => { if (talqeenAyahs.length) startTalqeen(0); });
+        return;
+      }
+      stopAllAudio();
+      activeAudioContext = 'talqeen';
+      audioIdx = startIdx !== null ? startIdx : 0;
+      audioRep = 1;
+      isAudioPlaying = true;
+      document.getElementById('miniPlayer').classList.add('show');
+      playUnifiedAyah();
+    }
+
+    function playUnifiedAyah() {
+      clearTimeout(pauseTimeout);
+      const list = activeAudioContext === 'mushaf' ? mushafAyahs : talqeenAyahs;
+      if (!isAudioPlaying || audioIdx >= list.length) {
+        const ctx = activeAudioContext;
+        stopAllAudio();
+        showToast(ctx === 'mushaf' ? 'تم إتمام تلاوة الحزب بحمد الله 🌿' : 'تم إتمام تلقين الربع بحمد الله 🌿');
+        return;
+      }
+
+      const a = list[audioIdx];
+      const reciter = activeAudioContext === 'mushaf'
+        ? document.getElementById('ratibReciterSelect').value
+        : document.getElementById('reciterSelect').value;
+
+      document.querySelectorAll('.ayah-span').forEach(el => el.classList.remove('active-ayah'));
+      const prefix = activeAudioContext === 'mushaf' ? 'mushaf-ayah-' : 'talqeen-ayah-';
+      const activeEl = document.getElementById(prefix + audioIdx);
+      if (activeEl) {
+        activeEl.classList.add('active-ayah');
+        activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      document.getElementById('miniTitle').textContent = `${a.surah.name} — الآية ${a.numberInSurah}`;
+      if (activeAudioContext === 'talqeen') {
+        const maxRep = parseInt(document.getElementById('repeatSelect').value, 10);
+        document.getElementById('miniSub').textContent = `تلقين • التكرار ${audioRep} من ${maxRep}`;
+      } else {
+        const label = mushafMode === 'ratib' ? `الحزب الراتب ${currentMushafHizb}` : `سورة ${SURAH_NAMES[currentMushafSurah - 1]}`;
+        document.getElementById('miniSub').textContent = `${label} • الآية ${audioIdx + 1} / ${list.length}`;
+      }
+      document.getElementById('miniPlayBtn').textContent = '⏸';
+
+      audioPlayer.src = `https://everyayah.com/data/warsh/${reciter}/${pad3(a.surah.number)}${pad3(a.numberInSurah)}.mp3`;
+      audioPlayer.playbackRate = activeAudioContext === 'mushaf'
+        ? parseFloat(document.getElementById('ratibSpeedSelect').value || '1')
+        : 1.0;
+
+      audioPlayer.play().catch(() => {
+        showToast('تعذر تشغيل الصوت، تحقق من الاتصال بالإنترنت');
+      });
+    }
+
+    audioPlayer.onended = () => {
+      if (!isAudioPlaying) return;
+      if (activeAudioContext === 'mushaf') {
+        audioIdx++;
+        playUnifiedAyah();
+      } else if (activeAudioContext === 'talqeen') {
+        const maxRep = parseInt(document.getElementById('repeatSelect').value, 10);
+        const pauseSec = parseInt(document.getElementById('pauseSelect').value, 10);
+        document.getElementById('miniSub').textContent = pauseSec > 0 ? `وقفة الترديد (${pauseSec} ثوانٍ)...` : 'الآية التالية...';
+
+        pauseTimeout = setTimeout(() => {
+          if (!isAudioPlaying) return;
+          if (audioRep < maxRep) {
+            audioRep++;
+          } else {
+            audioRep = 1;
+            audioIdx++;
+          }
+          playUnifiedAyah();
+        }, pauseSec * 1000);
+      }
+    };
+
+    function toggleAudioPause() {
+      if (audioPlayer.paused) {
+        isAudioPlaying = true;
+        audioPlayer.play();
+        document.getElementById('miniPlayBtn').textContent = '⏸';
+      } else {
+        audioPlayer.pause();
+        clearTimeout(pauseTimeout);
+        document.getElementById('miniPlayBtn').textContent = '▶';
+      }
+    }
+
+    function nextAudioAyah() {
+      const list = activeAudioContext === 'mushaf' ? mushafAyahs : talqeenAyahs;
+      if (audioIdx + 1 < list.length) {
+        audioIdx++;
+        audioRep = 1;
+        playUnifiedAyah();
+      }
+    }
+
+    function prevAudioAyah() {
+      if (audioIdx > 0) {
+        audioIdx--;
+        audioRep = 1;
+        playUnifiedAyah();
+      }
+    }
+
+    function stopAllAudio() {
+      isAudioPlaying = false;
+      clearTimeout(pauseTimeout);
+      audioPlayer.pause();
+      const s1 = document.getElementById('surahAudio');
+      const s2 = document.getElementById('mushafSurahAudio');
+      if (s1) s1.pause();
+      if (s2) s2.pause();
+      document.getElementById('miniPlayer').classList.remove('show');
+    }
+
+    function playFullSurah() {
+      stopAllAudio();
+      const base = document.getElementById('maghrebReciter').value;
+      const player = document.getElementById('surahAudio');
+      player.style.display = 'block';
+      player.src = `${base}${pad3(currentTalqeenSurah)}.mp3`;
+      player.play().catch(() => showToast('اضغط على زر التشغيل في المشغل أدناه'));
+    }
+
+    // --- 7 AYAHS TAFSIR ---
+    async function loadDailyTafsir() {
+      const box = document.getElementById('tafsirContainer');
+      box.innerHTML = '<div style="font-size:13px;color:var(--muted);">جاري تحميل الآيات السبع والتفسير الميسر...</div>';
+      const start = (state.currentDay - 1) * 7 + 1;
+      try {
+        const reqs = [];
+        for (let i = 0; i < 7; i++) {
+          reqs.push(fetch(`https://api.alquran.cloud/v1/ayah/${start + i}/editions/quran-warsh,ar.muyassar`).then(r => r.json()));
+        }
+        const results = await Promise.all(reqs);
+        let html = '';
+        results.forEach(json => {
+          if (json.code === 200 && json.data && json.data.length === 2) {
+            const qData = json.data[0];
+            const tData = json.data[1];
+            html += `
+              <div class="tafsir-item">
+                <div class="tafsir-ayah">${formatHabti(qData.text)} <span class="ayah-num">﴿${qData.numberInSurah} - ${qData.surah.name}﴾</span></div>
+                <p class="tafsir-text"><strong>التفسير الميسر:</strong> ${tData.text}</p>
+              </div>
+            `;
+          }
+        });
+        box.innerHTML = html || 'تعذر تحميل التفسير حالياً.';
+      } catch (e) {
+        box.innerHTML = '<div style="color:var(--danger);font-size:13px;">تعذر الاتصال بالإنترنت لتحميل التفسير.</div>';
+      }
+    }
+
+    // --- 60 HIZB MATRIX ---
+    function renderHizbGrid() {
+      const grid = document.getElementById('hizbGrid');
+      grid.innerHTML = '';
+      let mastered = 0;
+      for (let h = 1; h <= 60; h++) {
+        const card = document.createElement('div');
+        card.className = 'hizb-card';
+        let btns = '';
+        for (let q = 1; q <= 4; q++) {
+          const idx = (h - 1) * 4 + q;
+          const st = state.quarters[idx] || 0;
+          if (st === 2) mastered++;
+          btns += `<button class="q-btn ${st ? 's' + st : ''}" onclick="cycleQuarter(${idx})">${q}</button>`;
+        }
+        card.innerHTML = `
+          <div class="hizb-head-row">
+            <span class="hizb-title">الحزب ${h}</span>
+            <button class="hizb-open-btn" onclick="openHizbInMushaf(${h})">اقرأ 📖</button>
+          </div>
+          <div class="quarters-row">${btns}</div>
+        `;
+        grid.appendChild(card);
+      }
+      document.getElementById('khatmaStats').textContent = `${mastered} / 240 ربعاً متقناً`;
+    }
+
+    function cycleQuarter(idx) {
+      state.quarters[idx] = ((state.quarters[idx] || 0) + 1) % 3;
+      saveState();
+      renderHizbGrid();
+    }
+
+    // --- JOURNAL ---
+    function saveNote() {
+      const title = document.getElementById('noteTitle').value.trim();
+      const body = document.getElementById('noteBody').value.trim();
+      if (!title && !body) return showToast('اكتب فائدة أولاً');
+      state.notes.unshift({
+        id: Date.now(),
+        day: state.currentDay,
+        title: title || `فائدة اليوم ${state.currentDay}`,
+        body,
+        date: new Date().toLocaleDateString('ar-DZ')
+      });
+      document.getElementById('noteTitle').value = '';
+      document.getElementById('noteBody').value = '';
+      saveState();
+      renderNotes();
+      showToast('تم حفظ الفائدة في دفتر التدبر ✓');
+    }
+
+    function deleteNote(id) {
+      state.notes = state.notes.filter(n => n.id !== id);
+      saveState();
+      renderNotes();
+    }
+
+    function renderNotes() {
+      const q = (document.getElementById('noteSearch').value || '').trim();
+      const list = document.getElementById('notesList');
+      const filtered = state.notes.filter(n => n.title.includes(q) || n.body.includes(q));
+      if (!filtered.length) {
+        list.innerHTML = '<div style="text-align:center;color:var(--muted);font-size:13px;padding:14px;">لا توجد فوائد محفوظة بعد.</div>';
+        return;
+      }
+      list.innerHTML = filtered.map(n => `
+        <div class="tafsir-item">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+            <strong style="font-size:14px;">${n.title}</strong>
+            <button onclick="deleteNote(${n.id})" style="border:none;background:none;color:var(--danger);cursor:pointer;font-size:13px;">حذف</button>
+          </div>
+          <p class="tafsir-text">${n.body}</p>
+          <div style="font-size:11px;color:var(--muted);margin-top:4px;">اليوم ${n.day} • ${n.date}</div>
+        </div>
+      `).join('');
+    }
+
+    function exportNotes() {
+      if (!state.notes.length) return showToast('الدفتر فارغ حالياً');
+      const txt = state.notes.map(n => `[${n.date} - اليوم ${n.day}]\n${n.title}\n${n.body}\n---`).join('\n\n');
+      const blob = new Blob([txt], { type: 'text/plain;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'دفتر_التدبر_محراب_الحفاظ.txt';
+      a.click();
+    }
+
+    // --- PWA INSTALL & SERVICE WORKER ---
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').then(reg => {
+          reg.update().catch(() => {});
+        }).catch(() => {});
+      });
+    }
+
+    let deferredPrompt = null;
+    const installBtn = document.getElementById('installBtn');
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.style.display = 'inline-flex';
+    });
+
+    installBtn.onclick = async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      installBtn.style.display = 'none';
+    };
+
+    // --- INIT ---
+    initMushafSelectors();
+    applyPrefs();
+    renderDayStrip();
+    renderDashboard();
+  </script>
+</body>
+</html>
