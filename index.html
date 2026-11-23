@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>مِحراب الحُفّاظ — المصحف المحمدي والحزب الراتب</title>
-  <meta name="description" content="برنامج متكامل لمراجعة القرآن الكريم برواية ورش عن نافع — المصحف المحمدي بالوقف الهبطي، الحزب الراتب بالصيغة المغاربية، التلقين والتكرار، التدوير، وورد التدبر." />
+  <meta name="description" content="برنامج متكامل لمراجعة وتثبيت القرآن الكريم برواية ورش عن نافع — المصحف المحمدي بالوقف الهبطي، الحزب الراتب المغاربي، التلقين بالربط التراكمي، التدوير، وورد التدبر." />
   <meta name="theme-color" content="#0d3b2e" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -89,58 +89,39 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: 8px;
       max-width: 760px;
       margin: 0 auto;
     }
 
-    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand { display: flex; align-items: center; gap: 9px; min-width: 0; }
 
     .brand-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
+      width: 36px; height: 36px; border-radius: 11px;
       background: rgba(212, 175, 55, 0.18);
       border: 1.5px solid var(--gold);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      color: #f3d77c;
-      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 19px; color: #f3d77c; flex-shrink: 0;
     }
 
-    .brand h1 { margin: 0; font-size: 16.5px; font-weight: 800; line-height: 1.2; }
-    .brand .sub { font-size: 10.5px; color: #e6d59c; font-weight: 600; }
+    .brand h1 { margin: 0; font-size: 16px; font-weight: 800; line-height: 1.2; }
+    .brand .sub { font-size: 10px; color: #e6d59c; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-    .header-actions { display: flex; align-items: center; gap: 6px; }
+    .header-actions { display: flex; align-items: center; gap: 5px; flex-shrink: 0; }
 
     .icon-btn {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
+      width: 36px; height: 36px; border-radius: 11px;
       border: 1px solid rgba(255,255,255,0.2);
       background: rgba(255,255,255,0.1);
-      color: #fff;
-      font-size: 16px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      color: #fff; font-size: 15px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
     }
 
     #installBtn {
       display: none;
-      padding: 0 11px;
-      height: 36px;
-      border-radius: 11px;
-      border: 1px solid #f3d77c;
-      background: #c59b27;
-      color: #0b241c;
-      font-family: inherit;
-      font-weight: 800;
-      font-size: 12px;
-      cursor: pointer;
+      padding: 0 10px; height: 35px; border-radius: 10px;
+      border: 1px solid #f3d77c; background: #c59b27; color: #0b241c;
+      font-family: inherit; font-weight: 800; font-size: 11.5px; cursor: pointer;
     }
 
     /* Day Pills Bar */
@@ -151,56 +132,28 @@
     }
 
     .day-strip {
-      display: flex;
-      gap: 7px;
-      overflow-x: auto;
-      padding: 0 14px;
-      max-width: 760px;
-      margin: 0 auto;
-      scrollbar-width: none;
+      display: flex; gap: 7px; overflow-x: auto; padding: 0 14px;
+      max-width: 760px; margin: 0 auto; scrollbar-width: none;
     }
     .day-strip::-webkit-scrollbar { display: none; }
 
     .day-pill {
-      flex: 0 0 auto;
-      min-width: 54px;
-      height: 44px;
-      border-radius: 13px;
-      border: 1.5px solid var(--border);
-      background: var(--surface-soft);
-      color: var(--text);
-      font-family: inherit;
-      font-size: 11.5px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transition: 0.2s;
+      flex: 0 0 auto; min-width: 54px; height: 44px; border-radius: 13px;
+      border: 1.5px solid var(--border); background: var(--surface-soft);
+      color: var(--text); font-family: inherit; font-size: 11.5px; font-weight: 700;
+      cursor: pointer; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; transition: 0.2s;
     }
 
     .day-pill.active {
-      background: var(--primary);
-      color: #fff;
-      border-color: var(--gold);
+      background: var(--primary); color: #fff; border-color: var(--gold);
       box-shadow: 0 4px 10px rgba(13, 59, 46, 0.25);
     }
 
-    .day-pill.done::after {
-      content: '✓';
-      font-size: 10px;
-      color: var(--gold);
-      line-height: 1;
-    }
+    .day-pill.done::after { content: '✓'; font-size: 10px; color: var(--gold); line-height: 1; }
 
     /* Main Container */
-    .container {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 13px;
-    }
-
+    .container { max-width: 760px; margin: 0 auto; padding: 13px; }
     .view { display: none; }
     .view.active { display: block; animation: fadeIn 0.22s ease; }
 
@@ -212,152 +165,91 @@
     /* Hero Card */
     .hero-card {
       background: linear-gradient(135deg, #0d3b2e 0%, #175c49 100%);
-      color: #fff;
-      border-radius: 22px;
-      padding: 18px;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      border: 1px solid rgba(212, 175, 55, 0.45);
-      box-shadow: var(--shadow);
+      color: #fff; border-radius: 22px; padding: 17px; margin-bottom: 13px;
+      display: flex; align-items: center; justify-content: space-between; gap: 14px;
+      border: 1px solid rgba(212, 175, 55, 0.45); box-shadow: var(--shadow);
     }
 
-    .hero-info h2 { margin: 0 0 6px; font-size: 17.5px; font-weight: 800; }
+    .hero-info h2 { margin: 0 0 5px; font-size: 17px; font-weight: 800; }
     .hero-info p { margin: 0; font-size: 12px; color: #dcece6; line-height: 1.6; }
 
     .streak-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 10px;
-      padding: 5px 12px;
-      border-radius: 999px;
-      background: rgba(212, 175, 55, 0.2);
-      border: 1px solid rgba(243, 215, 124, 0.5);
-      color: #f8e39e;
-      font-size: 11.5px;
-      font-weight: 700;
+      display: inline-flex; align-items: center; gap: 6px; margin-top: 9px;
+      padding: 4px 11px; border-radius: 999px;
+      background: rgba(212, 175, 55, 0.2); border: 1px solid rgba(243, 215, 124, 0.5);
+      color: #f8e39e; font-size: 11.5px; font-weight: 700;
     }
 
-    .ring-wrap { position: relative; width: 76px; height: 76px; flex-shrink: 0; }
-    .ring-wrap svg { transform: rotate(-90deg); width: 76px; height: 76px; }
+    .ring-wrap { position: relative; width: 74px; height: 74px; flex-shrink: 0; }
+    .ring-wrap svg { transform: rotate(-90deg); width: 74px; height: 74px; }
     .ring-bg { fill: none; stroke: rgba(255,255,255,0.18); stroke-width: 7; }
     .ring-fg { fill: none; stroke: #e6c153; stroke-width: 7; stroke-linecap: round; transition: stroke-dashoffset 0.4s ease; }
     .ring-text {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 800; font-size: 15.5px; color: #fff;
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 15px; color: #fff;
     }
 
     /* Cards */
     .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 15px;
-      margin-bottom: 13px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 15px; margin-bottom: 13px;
       box-shadow: var(--shadow);
     }
 
     .card-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      margin-bottom: 10px;
-      flex-wrap: wrap;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 8px; margin-bottom: 10px; flex-wrap: wrap;
     }
 
     .card-title { display: flex; align-items: center; gap: 8px; }
     .card h3 { margin: 0; font-size: 15px; font-weight: 800; }
-    .card-desc { margin: 0 0 11px; font-size: 12.8px; color: var(--muted); line-height: 1.65; }
+    .card-desc { margin: 0 0 11px; font-size: 12.6px; color: var(--muted); line-height: 1.65; }
 
     .pill-badge {
-      background: var(--gold-soft);
-      color: var(--gold-dark);
+      background: var(--gold-soft); color: var(--gold-dark);
       border: 1px solid rgba(197, 155, 39, 0.35);
-      padding: 3px 10px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 700;
-      white-space: nowrap;
+      padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; white-space: nowrap;
     }
     body.dark .pill-badge { color: #f0d27a; }
 
     /* Segmented Tabs */
     .seg-tabs {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
-      background: var(--surface-soft);
-      padding: 5px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      margin-bottom: 12px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px;
+      background: var(--surface-soft); padding: 5px; border-radius: 14px;
+      border: 1px solid var(--border); margin-bottom: 12px;
     }
 
     .seg-btn {
-      min-height: 40px;
-      border: none;
-      border-radius: 10px;
-      background: transparent;
-      color: var(--muted);
-      font-family: inherit;
-      font-size: 12.5px;
-      font-weight: 800;
-      cursor: pointer;
-      transition: 0.2s;
+      min-height: 38px; border: none; border-radius: 10px; background: transparent;
+      color: var(--muted); font-family: inherit; font-size: 12px; font-weight: 800;
+      cursor: pointer; transition: 0.2s; padding: 0 4px;
     }
-
     .seg-btn.active {
-      background: var(--primary);
-      color: #fff;
+      background: var(--primary); color: #fff;
       box-shadow: 0 3px 8px rgba(13, 59, 46, 0.22);
     }
 
     /* Checkboxes */
     .check-list { display: grid; gap: 8px; }
     .check-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      border: 1.5px solid var(--border);
-      background: var(--surface-soft);
-      cursor: pointer;
-      min-height: 48px;
-      transition: 0.2s;
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      padding: 10px 12px; border-radius: 14px; border: 1.5px solid var(--border);
+      background: var(--surface-soft); cursor: pointer; min-height: 48px; transition: 0.2s;
     }
-
-    .check-item.checked {
-      border-color: var(--success);
-      background: rgba(27, 122, 86, 0.1);
-    }
+    .check-item.checked { border-color: var(--success); background: rgba(27, 122, 86, 0.1); }
 
     .check-left { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; }
     .check-box {
-      width: 24px; height: 24px; border-radius: 8px;
-      border: 2px solid var(--gold);
+      width: 24px; height: 24px; border-radius: 8px; border: 2px solid var(--gold);
       display: flex; align-items: center; justify-content: center;
       color: #fff; font-size: 14px; flex-shrink: 0;
     }
     .check-item.checked .check-box { background: var(--success); border-color: var(--success); }
 
     .mini-action-btn {
-      border: 1px solid rgba(197, 155, 39, 0.5);
-      background: var(--gold-soft);
-      color: var(--primary);
-      font-family: inherit;
-      font-size: 11px;
-      font-weight: 800;
-      padding: 5px 9px;
-      border-radius: 9px;
-      cursor: pointer;
-      white-space: nowrap;
+      border: 1px solid rgba(197, 155, 39, 0.5); background: var(--gold-soft);
+      color: var(--primary); font-family: inherit; font-size: 11px; font-weight: 800;
+      padding: 5px 9px; border-radius: 9px; cursor: pointer; white-space: nowrap;
     }
     body.dark .mini-action-btn { color: #f0d27a; }
 
@@ -365,85 +257,91 @@
     .btn-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
 
     .btn {
-      min-height: 42px;
-      padding: 0 13px;
-      border-radius: 12px;
-      border: none;
-      font-family: inherit;
-      font-size: 12.8px;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
+      min-height: 42px; padding: 0 13px; border-radius: 12px; border: none;
+      font-family: inherit; font-size: 12.6px; font-weight: 700; cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
     }
 
     .btn-primary { background: var(--primary); color: #fff; }
     .btn-gold { background: var(--gold); color: #11241c; }
     .btn-success { background: var(--success); color: #fff; }
+    .btn-danger { background: var(--danger); color: #fff; }
     .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--text); }
 
     select, input[type="number"], input[type="text"], textarea {
-      width: 100%;
-      padding: 10px 11px;
-      border-radius: 12px;
-      border: 1.5px solid var(--border);
-      background: var(--surface-soft);
-      color: var(--text);
-      font-family: inherit;
-      font-size: 13px;
-      outline: none;
+      width: 100%; padding: 10px 11px; border-radius: 12px;
+      border: 1.5px solid var(--border); background: var(--surface-soft);
+      color: var(--text); font-family: inherit; font-size: 13px; outline: none;
     }
 
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
-    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
     .field label { display: block; font-size: 11.5px; font-weight: 700; color: var(--muted); margin-bottom: 4px; }
 
-    /* =======================================================
-       AL-MUSHAF AL-MUHAMMADI (MAGHREBI ORNATE FRAME & PAPER)
-       ======================================================= */
-    .mushaf-toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 8px;
-      background: var(--surface-soft);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 8px 10px;
-      margin-bottom: 10px;
+    /* Toggle Switch Row */
+    .switch-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      background: var(--surface-soft); border: 1.5px solid var(--border);
+      border-radius: 13px; padding: 9px 12px; margin-bottom: 9px; cursor: pointer;
+    }
+    .switch-row .label-main { font-size: 12.5px; font-weight: 800; }
+    .switch-row .label-sub { font-size: 11px; color: var(--muted); }
+    .switch-row input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--primary); cursor: pointer; }
+
+    /* Live Talqeen Status Banner */
+    .talqeen-status-bar {
+      display: none;
+      align-items: center; justify-content: space-between; gap: 10px;
+      padding: 11px 14px; border-radius: 14px; margin-top: 10px;
+      font-size: 13px; font-weight: 800;
+      border: 1.5px solid var(--gold);
+      background: linear-gradient(135deg, rgba(13, 59, 46, 0.1), rgba(197, 155, 39, 0.18));
+      color: var(--primary);
+    }
+    body.dark .talqeen-status-bar { color: #f6e1a2; }
+    .talqeen-status-bar.show { display: flex; }
+    .talqeen-status-bar.phase-repeat {
+      background: linear-gradient(135deg, rgba(197, 155, 39, 0.28), rgba(27, 122, 86, 0.18));
+      border-color: var(--success);
+    }
+    .talqeen-status-bar.phase-rabt {
+      background: linear-gradient(135deg, rgba(22, 89, 71, 0.25), rgba(197, 155, 39, 0.22));
     }
 
-    .tool-group { display: flex; align-items: center; gap: 5px; }
+    /* Quarter Quick-Jump Bar inside Mushaf */
+    .q-jump-bar {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
+      margin-top: 10px;
+    }
+    .q-jump-btn {
+      height: 36px; border-radius: 10px;
+      border: 1px solid rgba(197, 155, 39, 0.45);
+      background: var(--gold-soft); color: var(--primary);
+      font-family: inherit; font-size: 11.5px; font-weight: 800; cursor: pointer;
+    }
+    body.dark .q-jump-btn { color: #f3d77c; }
+
+    /* Mushaf Toolbar */
+    .mushaf-toolbar {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 7px;
+      background: var(--surface-soft); border: 1px solid var(--border);
+      border-radius: 14px; padding: 8px 9px; margin-top: 10px;
+    }
+
+    .tool-group { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
     .tool-chip {
-      height: 34px;
-      padding: 0 10px;
-      border-radius: 9px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text);
-      font-family: inherit;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
+      height: 33px; padding: 0 9px; border-radius: 9px;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--text); font-family: inherit; font-size: 11.5px; font-weight: 700; cursor: pointer;
     }
-    .tool-chip.active {
-      background: var(--primary);
-      color: #fff;
-      border-color: var(--gold);
-    }
+    .tool-chip.active { background: var(--primary); color: #fff; border-color: var(--gold); }
 
     /* Authentic Muhammadi Mushaf Page Container */
     .muhammadi-frame {
-      position: relative;
-      background: #fdf9ed;
-      color: #151a17;
-      border: 3px double #b88b1e;
-      border-radius: 18px;
-      padding: 16px 14px 20px;
-      margin-top: 10px;
+      position: relative; background: #fdf9ed; color: #151a17;
+      border: 3px double #b88b1e; border-radius: 18px;
+      padding: 16px 14px 20px; margin-top: 10px;
       box-shadow:
         inset 0 0 0 4px rgba(197, 155, 39, 0.16),
         inset 0 0 28px rgba(184, 139, 30, 0.1),
@@ -451,295 +349,178 @@
       transition: background 0.25s, color 0.25s;
     }
 
-    .muhammadi-frame.paper-sepia {
-      background: #f4e7cb;
-      color: #241b0f;
-      border-color: #9e7316;
-    }
-
+    .muhammadi-frame.paper-sepia { background: #f4e7cb; color: #241b0f; border-color: #9e7316; }
     .muhammadi-frame.paper-night,
     body.dark .muhammadi-frame:not(.paper-classic):not(.paper-sepia) {
-      background: #101f1a;
-      color: #f1ede0;
-      border-color: #8a6d20;
+      background: #101f1a; color: #f1ede0; border-color: #8a6d20;
       box-shadow: inset 0 0 0 4px rgba(212, 175, 55, 0.15);
     }
 
     .muhammadi-banner {
       background: linear-gradient(90deg, rgba(13,59,46,0.08), rgba(197,155,39,0.22), rgba(13,59,46,0.08));
-      border-top: 2px solid #c59b27;
-      border-bottom: 2px solid #c59b27;
-      border-radius: 10px;
-      padding: 8px 12px;
-      text-align: center;
-      margin-bottom: 14px;
+      border-top: 2px solid #c59b27; border-bottom: 2px solid #c59b27;
+      border-radius: 10px; padding: 8px 12px; text-align: center; margin-bottom: 14px;
     }
 
-    .muhammadi-banner .title {
-      font-family: 'Amiri', serif;
-      font-size: 18px;
-      font-weight: 700;
-      color: #0d3b2e;
-    }
+    .muhammadi-banner .title { font-family: 'Amiri', serif; font-size: 18px; font-weight: 700; color: #0d3b2e; }
     .paper-night .muhammadi-banner .title,
-    body.dark .muhammadi-frame:not(.paper-classic):not(.paper-sepia) .muhammadi-banner .title {
-      color: #f3d77c;
-    }
+    body.dark .muhammadi-frame:not(.paper-classic):not(.paper-sepia) .muhammadi-banner .title { color: #f3d77c; }
 
-    .muhammadi-banner .meta {
-      font-size: 11px;
-      color: #7c5c10;
-      font-weight: 700;
-      margin-top: 2px;
-    }
+    .muhammadi-banner .meta { font-size: 11px; color: #7c5c10; font-weight: 700; margin-top: 2px; }
     .paper-night .muhammadi-banner .meta,
-    body.dark .muhammadi-frame:not(.paper-classic):not(.paper-sepia) .muhammadi-banner .meta {
-      color: #d6c387;
-    }
+    body.dark .muhammadi-frame:not(.paper-classic):not(.paper-sepia) .muhammadi-banner .meta { color: #d6c387; }
 
-    /* Maghrebi Surah Ornamental Cartouche */
     .surah-cartouche {
-      margin: 18px 0 12px;
-      padding: 9px 14px;
-      border-radius: 12px;
+      margin: 18px 0 12px; padding: 9px 14px; border-radius: 12px;
       background: linear-gradient(135deg, rgba(13,59,46,0.92), rgba(22,89,71,0.92));
-      border: 2px solid #d4af37;
-      color: #f9e7a8;
-      text-align: center;
-      font-family: 'Amiri', serif;
-      font-size: 21px;
-      font-weight: 700;
-      letter-spacing: 0.4px;
+      border: 2px solid #d4af37; color: #f9e7a8; text-align: center;
+      font-family: 'Amiri', serif; font-size: 21px; font-weight: 700;
       box-shadow: 0 3px 10px rgba(0,0,0,0.12);
     }
 
     .quarter-divider {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin: 16px 0 10px;
-      color: #9c7715;
-      font-size: 12px;
-      font-weight: 800;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      margin: 16px 0 10px; color: #9c7715; font-size: 12px; font-weight: 800;
+      scroll-margin-top: 84px;
     }
     .quarter-divider::before, .quarter-divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
+      content: ''; flex: 1; height: 1px;
       background: linear-gradient(90deg, transparent, #c59b27, transparent);
     }
     .paper-night .quarter-divider,
-    body.dark .muhammadi-frame:not(.paper-classic):not(.paper-sepia) .quarter-divider {
-      color: #f0d27a;
-    }
+    body.dark .muhammadi-frame:not(.paper-classic):not(.paper-sepia) .quarter-divider { color: #f0d27a; }
 
     .ayah-block {
       font-family: 'Scheherazade New', 'Amiri Quran', serif;
-      font-size: var(--mushaf-font-size);
-      line-height: 2.3;
-      text-align: justify;
-      direction: rtl;
+      font-size: var(--mushaf-font-size); line-height: 2.3; text-align: justify; direction: rtl;
     }
 
-    .ayah-span {
-      padding: 2px 4px;
-      border-radius: 8px;
-      transition: background 0.25s, filter 0.25s;
-      cursor: pointer;
-    }
+    .ayah-span { padding: 2px 4px; border-radius: 8px; transition: background 0.25s, filter 0.25s; cursor: pointer; }
+    .ayah-span.active-ayah { background: rgba(197, 155, 39, 0.34); box-shadow: 0 0 0 2px rgba(197, 155, 39, 0.42); }
+    .ayah-span.in-range { border-bottom: 2px dotted rgba(27, 122, 86, 0.55); }
+    .mushaf-hidden .ayah-span:not(.revealed) { filter: blur(7px); opacity: 0.36; user-select: none; }
 
-    .ayah-span.active-ayah {
-      background: rgba(197, 155, 39, 0.32);
-      box-shadow: 0 0 0 2px rgba(197, 155, 39, 0.4);
-    }
-
-    .mushaf-hidden .ayah-span:not(.revealed) {
-      filter: blur(7px);
-      opacity: 0.38;
-      user-select: none;
-    }
-
-    .ayah-num {
-      font-family: 'Cairo', sans-serif;
-      font-size: 12.5px;
-      font-weight: 800;
-      color: #9c7715;
-      margin: 0 3px;
-      display: inline-block;
-    }
+    .ayah-num { font-family: 'Cairo', sans-serif; font-size: 12.5px; font-weight: 800; color: #9c7715; margin: 0 3px; display: inline-block; }
     .paper-night .ayah-num,
-    body.dark .muhammadi-frame:not(.paper-classic):not(.paper-sepia) .ayah-num {
-      color: #f0d27a;
-    }
+    body.dark .muhammadi-frame:not(.paper-classic):not(.paper-sepia) .ayah-num { color: #f0d27a; }
 
-    /* Maghrebi Waqf Al-Habti (ص) */
-    .habti {
-      color: #a92d2d;
-      font-family: 'Amiri', serif;
-      font-size: 0.72em;
-      font-weight: 700;
-      vertical-align: super;
-      margin: 0 2px;
-    }
+    .habti { color: #a92d2d; font-family: 'Amiri', serif; font-size: 0.72em; font-weight: 700; vertical-align: super; margin: 0 2px; }
     .paper-night .habti,
-    body.dark .muhammadi-frame:not(.paper-classic):not(.paper-sepia) .habti {
-      color: #f5b942;
-    }
+    body.dark .muhammadi-frame:not(.paper-classic):not(.paper-sepia) .habti { color: #f5b942; }
 
-    .sajda-mark {
-      color: #0d3b2e;
-      background: rgba(197, 155, 39, 0.25);
-      border-radius: 6px;
-      padding: 0 4px;
-      font-size: 0.8em;
-      margin: 0 2px;
-    }
+    .sajda-mark { color: #0d3b2e; background: rgba(197, 155, 39, 0.25); border-radius: 6px; padding: 0 4px; font-size: 0.8em; margin: 0 2px; }
     .paper-night .sajda-mark,
-    body.dark .muhammadi-frame:not(.paper-classic):not(.paper-sepia) .sajda-mark {
-      color: #f3d77c;
-    }
+    body.dark .muhammadi-frame:not(.paper-classic):not(.paper-sepia) .sajda-mark { color: #f3d77c; }
 
-    /* Maghrebi Hizb Ratib Intro & Dua Cards */
+    /* Maghrebi Hizb Ratib Ritual Boxes */
     .ratib-ritual-box {
       background: linear-gradient(135deg, rgba(13, 59, 46, 0.06), rgba(197, 155, 39, 0.12));
       border: 1.5px solid rgba(197, 155, 39, 0.55);
-      border-radius: 15px;
-      padding: 13px 14px;
-      margin: 10px 0;
+      border-radius: 15px; padding: 13px 14px; margin: 10px 0;
     }
 
     .ratib-ritual-title {
-      font-size: 13px;
-      font-weight: 800;
-      color: var(--primary);
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      font-size: 13px; font-weight: 800; color: var(--primary); margin-bottom: 6px;
+      display: flex; align-items: center; justify-content: space-between;
     }
     body.dark .ratib-ritual-title { color: #f0d27a; }
+    .ratib-dua-text { font-family: 'Amiri', serif; font-size: 19px; line-height: 1.95; margin: 0; text-align: justify; }
 
-    .ratib-dua-text {
-      font-family: 'Amiri', serif;
-      font-size: 19px;
-      line-height: 1.95;
-      margin: 0;
-      text-align: justify;
-    }
-
-    /* Collapsible details */
     details.info-box {
-      background: var(--surface-soft);
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      padding: 10px 12px;
-      margin-top: 10px;
-      font-size: 12.5px;
-      line-height: 1.7;
+      background: var(--surface-soft); border: 1px solid var(--border);
+      border-radius: 13px; padding: 10px 12px; margin-top: 10px; font-size: 12.5px; line-height: 1.7;
     }
-    details.info-box summary {
-      font-weight: 800;
-      cursor: pointer;
-      color: var(--primary);
-    }
+    details.info-box summary { font-weight: 800; cursor: pointer; color: var(--primary); }
     body.dark details.info-box summary { color: #f0d27a; }
+
+    /* Search Result Item */
+    .search-item {
+      border-bottom: 1px solid var(--border); padding: 10px 0;
+    }
+    .search-item:last-child { border-bottom: none; }
 
     /* Tafsir Item */
     .tafsir-item { border-bottom: 1px solid var(--border); padding: 12px 0; }
     .tafsir-item:last-child { border-bottom: none; }
-    .tafsir-ayah {
-      font-family: 'Scheherazade New', 'Amiri Quran', serif;
-      font-size: 24px;
-      line-height: 2;
-      color: var(--primary);
-      margin-bottom: 6px;
-    }
+    .tafsir-ayah { font-family: 'Scheherazade New', 'Amiri Quran', serif; font-size: 24px; line-height: 2; color: var(--primary); margin-bottom: 6px; }
     body.dark .tafsir-ayah { color: #f0d27a; }
     .tafsir-text { font-size: 13.2px; line-height: 1.8; color: var(--text); margin: 0; }
 
     /* 60 Hizb Matrix */
-    .hizb-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 10px;
-    }
-
-    .hizb-card {
-      background: var(--surface-soft);
-      border: 1.5px solid var(--border);
-      border-radius: 14px;
-      padding: 10px;
-      text-align: center;
-    }
-
-    .hizb-head-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 8px;
-    }
+    .hizb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+    .hizb-card { background: var(--surface-soft); border: 1.5px solid var(--border); border-radius: 14px; padding: 10px; text-align: center; }
+    .hizb-head-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
     .hizb-title { font-size: 12.5px; font-weight: 800; }
     .hizb-open-btn {
-      border: none;
-      background: var(--gold-soft);
-      color: var(--primary);
-      border-radius: 7px;
-      padding: 2px 7px;
-      font-family: inherit;
-      font-size: 10.5px;
-      font-weight: 800;
-      cursor: pointer;
+      border: none; background: var(--gold-soft); color: var(--primary);
+      border-radius: 7px; padding: 2px 7px; font-family: inherit; font-size: 10.5px; font-weight: 800; cursor: pointer;
     }
     body.dark .hizb-open-btn { color: #f0d27a; }
 
     .quarters-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
     .q-btn {
-      height: 34px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: 800;
-      cursor: pointer;
+      height: 34px; border-radius: 8px; border: 1px solid var(--border);
+      background: var(--surface); color: var(--muted); font-size: 11px; font-weight: 800; cursor: pointer;
     }
     .q-btn.s1 { background: rgba(197, 155, 39, 0.25); border-color: var(--gold); color: var(--text); }
     .q-btn.s2 { background: var(--success); border-color: var(--success); color: #fff; }
 
     /* Timer Pill */
     .timer-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: var(--surface-soft);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 10px 13px;
-      margin-top: 10px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--surface-soft); border: 1px solid var(--border);
+      border-radius: 14px; padding: 10px 13px; margin-top: 10px;
     }
     .timer-val { font-size: 20px; font-weight: 800; font-variant-numeric: tabular-nums; color: var(--primary); }
     body.dark .timer-val { color: #f0d27a; }
 
-    /* Sticky Mini Audio Player */
+    /* Bottom Sheet Modal (Quick Tafsir & Settings) */
+    .modal-backdrop {
+      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.55);
+      z-index: 80; display: none; align-items: flex-end; justify-content: center;
+    }
+    .modal-backdrop.open { display: flex; }
+
+    .bottom-sheet {
+      width: 100%; max-width: 760px; max-height: 85vh; overflow-y: auto;
+      background: var(--surface); border-top: 2px solid var(--gold);
+      border-radius: 22px 22px 0 0; padding: 16px 16px calc(20px + var(--safe-bottom));
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.35);
+      animation: slideUp 0.22s ease;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .sheet-head {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border);
+    }
+    .sheet-head h3 { margin: 0; font-size: 15.5px; font-weight: 800; }
+    .sheet-close {
+      width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--border);
+      background: var(--surface-soft); color: var(--text); font-size: 16px; cursor: pointer;
+    }
+
+    .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; }
+    .stat-box {
+      background: var(--surface-soft); border: 1px solid var(--border);
+      border-radius: 13px; padding: 10px 6px; text-align: center;
+    }
+    .stat-num { font-size: 18px; font-weight: 800; color: var(--primary); }
+    body.dark .stat-num { color: #f0d27a; }
+    .stat-lbl { font-size: 11px; color: var(--muted); font-weight: 700; }
+
+    /* Sticky Unified Mini Audio Player */
     .mini-player {
-      position: fixed;
-      left: 10px;
-      right: 10px;
-      bottom: calc(74px + var(--safe-bottom));
-      max-width: 740px;
-      margin: 0 auto;
-      background: #0d3b2e;
-      color: #fff;
-      border: 1.5px solid var(--gold);
-      border-radius: 16px;
-      padding: 9px 11px;
-      display: none;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      z-index: 45;
-      box-shadow: 0 10px 26px rgba(0,0,0,0.32);
+      position: fixed; left: 10px; right: 10px;
+      bottom: calc(74px + var(--safe-bottom)); max-width: 740px; margin: 0 auto;
+      background: #0d3b2e; color: #fff; border: 1.5px solid var(--gold);
+      border-radius: 16px; padding: 9px 11px; display: none;
+      align-items: center; justify-content: space-between; gap: 8px;
+      z-index: 45; box-shadow: 0 10px 26px rgba(0,0,0,0.32);
     }
 
     .mini-player.show { display: flex; }
@@ -748,78 +529,37 @@
     .mini-sub { font-size: 10.5px; color: #f3d77c; }
     .mini-controls { display: flex; gap: 5px; }
     .mini-btn {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.25);
-      background: rgba(255,255,255,0.12);
-      color: #fff;
-      font-size: 14px;
-      cursor: pointer;
+      width: 36px; height: 36px; border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.12);
+      color: #fff; font-size: 14px; cursor: pointer;
     }
 
-    /* Bottom Navigation (5 Tabs) */
+    /* Bottom Navigation */
     .bottom-nav {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 50;
-      background: var(--surface);
-      border-top: 1.5px solid var(--border);
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+      background: var(--surface); border-top: 1.5px solid var(--border);
       padding: 6px 6px calc(8px + var(--safe-bottom));
       box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.08);
     }
 
-    .nav-inner {
-      max-width: 760px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 3px;
-    }
-
+    .nav-inner { max-width: 760px; margin: 0 auto; display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; }
     .nav-btn {
-      background: transparent;
-      border: none;
-      color: var(--muted);
-      font-family: inherit;
-      font-size: 10.2px;
-      font-weight: 700;
-      padding: 6px 2px;
-      border-radius: 11px;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
+      background: transparent; border: none; color: var(--muted);
+      font-family: inherit; font-size: 10.2px; font-weight: 700; padding: 6px 2px;
+      border-radius: 11px; cursor: pointer; display: flex; flex-direction: column;
+      align-items: center; gap: 3px;
     }
-
     .nav-btn .ico { font-size: 18px; line-height: 1; }
-    .nav-btn.active {
-      color: var(--primary);
-      background: var(--gold-soft);
-    }
+    .nav-btn.active { color: var(--primary); background: var(--gold-soft); }
     body.dark .nav-btn.active { color: #f0d27a; }
 
     /* Toast */
     .toast {
-      position: fixed;
-      top: calc(74px + var(--safe-top));
-      left: 50%;
-      transform: translateX(-50%);
-      background: #0d3b2e;
-      color: #fff;
-      border: 1px solid var(--gold);
-      padding: 10px 16px;
-      border-radius: 12px;
-      font-size: 12.5px;
-      font-weight: 700;
-      z-index: 100;
-      display: none;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.28);
-      text-align: center;
-      max-width: 90vw;
+      position: fixed; top: calc(72px + var(--safe-top)); left: 50%;
+      transform: translateX(-50%); background: #0d3b2e; color: #fff;
+      border: 1px solid var(--gold); padding: 10px 16px; border-radius: 12px;
+      font-size: 12.5px; font-weight: 700; z-index: 120; display: none;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.28); text-align: center; max-width: 90vw;
     }
     .toast.show { display: block; }
   </style>
@@ -832,12 +572,13 @@
         <div class="brand-icon">۞</div>
         <div>
           <h1>مِحراب الحُفّاظ</h1>
-          <div class="sub">المصحف المحمدي • الحزب الراتب • رواية ورش</div>
+          <div class="sub">المصحف المحمدي • الحزب الراتب • ورش</div>
         </div>
       </div>
       <div class="header-actions">
         <button id="installBtn">تثبيت</button>
-        <button class="icon-btn" id="bookmarkJumpBtn" title="العودة للعلامة المرجعية" onclick="jumpToBookmark()">🔖</button>
+        <button class="icon-btn" title="العلامة المرجعية" onclick="jumpToBookmark()">🔖</button>
+        <button class="icon-btn" title="الإعدادات والنسخ الاحتياطي" onclick="openSettingsModal()">⚙️</button>
         <button class="icon-btn" id="themeToggle" title="الوضع الليلي">🌙</button>
       </div>
     </div>
@@ -865,13 +606,10 @@
         </div>
       </div>
 
-      <!-- Pillar 1: Hizb Ratib (Maghrebi Style) -->
+      <!-- Pillar 1: Hizb Ratib -->
       <div class="card">
         <div class="card-head">
-          <div class="card-title">
-            <span>🕌</span>
-            <h3>1. الحزب الراتب بالصيغة المغاربية</h3>
-          </div>
+          <div class="card-title"><span>🕌</span><h3>1. الحزب الراتب بالصيغة المغاربية</h3></div>
           <span class="pill-badge" id="ratibBadge">حزب 1 و 2</span>
         </div>
         <p class="card-desc">حزب بعد صلاة الصبح وحزب بعد صلاة المغرب على طريقة مساجد الجزائر والمغرب لإتمام ختمة كل 30 يوماً.</p>
@@ -890,30 +628,24 @@
       <!-- Pillar 2: Talqeen -->
       <div class="card">
         <div class="card-head">
-          <div class="card-title">
-            <span>🎙️</span>
-            <h3>2. التلقين والتكرار (ربع حزب)</h3>
-          </div>
+          <div class="card-title"><span>🎙️</span><h3>2. التلقين والربط (ربع حزب)</h3></div>
           <span class="pill-badge" id="talqeenBadge">الربع 1</span>
         </div>
-        <p class="card-desc">تثبيت ربع حزب بالتلقين والترديد خلف قارئ متقن برواية ورش من طريق الأزرق.</p>
+        <p class="card-desc">تثبيت ربع حزب بالتلقين والتكرار والربط التراكمي خلف قارئ متقن برواية ورش عن نافع.</p>
         <div class="check-list">
           <div class="check-item" data-task="talqeen">
             <div class="check-left"><span class="check-box">✓</span><span id="talqeenLabel">إتمام تثبيت الربع المقرر اليوم</span></div>
           </div>
         </div>
         <div class="btn-row">
-          <button class="btn btn-gold" onclick="switchTab('talqeen')">فتح مصحف التلقين 🎧</button>
+          <button class="btn btn-gold" onclick="switchTab('talqeen')">فتح مصحف التلقين والربط 🎧</button>
         </div>
       </div>
 
       <!-- Pillar 3: Tadweer (5 Hizbs) -->
       <div class="card">
         <div class="card-head">
-          <div class="card-title">
-            <span>⚡</span>
-            <h3>3. مراجعة التدوير (5 أحزاب يومياً)</h3>
-          </div>
+          <div class="card-title"><span>⚡</span><h3>3. مراجعة التدوير (5 أحزاب يومياً)</h3></div>
           <span class="pill-badge" id="tadweerBadge">أحزاب 1 إلى 5</span>
         </div>
         <p class="card-desc">قراءة متوسطة (التدوير) لـ 5 أحزاب مقسمة على الصلوات الخمس لختم القرآن كل 12 يوماً.</p>
@@ -933,13 +665,10 @@
       <!-- Pillar 4: 7 Ayahs Tafsir & Tadabbur -->
       <div class="card">
         <div class="card-head">
-          <div class="card-title">
-            <span>🌿</span>
-            <h3>4. ورد الفهم والتدبر (7 آيات)</h3>
-          </div>
+          <div class="card-title"><span>🌿</span><h3>4. ورد الفهم والتدبر (7 آيات)</h3></div>
           <span class="pill-badge" id="tadabburBadge">آيات 1–7</span>
         </div>
-        <p class="card-desc">قراءة التفسير الميسر لـ 7 آيات متسلسلة يومياً مع استخراج فائدة عملية.</p>
+        <p class="card-desc">قراءة التفسير الميسر لـ 7 آيات متسلسلة يومياً، مع إمكانية إضافة أي آية مباشرة لدفتر التدبر أو تخصيص نقطة البداية من الإعدادات (⚙️).</p>
         <div class="check-list">
           <div class="check-item" data-task="tadabbur">
             <div class="check-left"><span class="check-box">✓</span><span>إتمام قراءة التفسير وتدوين فائدة اليوم</span></div>
@@ -947,6 +676,7 @@
         </div>
         <div class="btn-row">
           <button class="btn btn-primary" onclick="loadDailyTafsir()">عرض الآيات السبع والتفسير 📖</button>
+          <button class="btn btn-outline" onclick="openSettingsModal()">تخصيص البداية ⚙️</button>
         </div>
         <div id="tafsirContainer" style="margin-top:12px;"></div>
       </div>
@@ -956,17 +686,15 @@
     <section id="view-mushaf" class="view">
       <div class="card">
         <div class="card-head">
-          <div class="card-title">
-            <span>📖</span>
-            <h3>المصحف المحمدي المغاربي</h3>
-          </div>
+          <div class="card-title"><span>📖</span><h3>المصحف المحمدي المغاربي</h3></div>
           <span class="pill-badge">ورش • الوقف الهبطي (ص)</span>
         </div>
 
-        <!-- Mode Switcher: Maghrebi Hizb Ratib vs Full Surah -->
+        <!-- 3-Way Mode Switcher -->
         <div class="seg-tabs">
-          <button class="seg-btn active" id="modeRatibBtn" onclick="setMushafMode('ratib')">🕌 الحزب الراتب (1–60)</button>
-          <button class="seg-btn" id="modeSurahBtn" onclick="setMushafMode('surah')">📜 تصفح بالسورة (114)</button>
+          <button class="seg-btn active" id="modeRatibBtn" onclick="setMushafMode('ratib')">🕌 الحزب الراتب</button>
+          <button class="seg-btn" id="modeSurahBtn" onclick="setMushafMode('surah')">📜 بالسورة</button>
+          <button class="seg-btn" id="modeSearchBtn" onclick="setMushafMode('search')">🔍 بحث</button>
         </div>
 
         <!-- MODE A: HIZB RATIB CONTROLS -->
@@ -1007,9 +735,17 @@
 
           <div class="btn-row" style="margin-top:6px;">
             <button class="btn btn-gold" style="flex:1;" onclick="startContinuousMushafAudio()">▶ تلاوة الحزب كاملاً</button>
-            <button class="btn btn-outline" onclick="saveMushafBookmark()">🔖 حفظ العلامة</button>
+            <button class="btn btn-outline" onclick="saveMushafBookmark()">🔖 حفظ</button>
             <button class="btn btn-outline" onclick="stepHizb(-1)">◀ السابق</button>
             <button class="btn btn-outline" onclick="stepHizb(1)">التالي ▶</button>
+          </div>
+
+          <!-- Quarter Quick-Jump Pills -->
+          <div class="q-jump-bar" id="quarterJumpBar">
+            <button class="q-jump-btn" onclick="jumpToQuarterSection(0)">الربع 1</button>
+            <button class="q-jump-btn" onclick="jumpToQuarterSection(1)">الربع 2</button>
+            <button class="q-jump-btn" onclick="jumpToQuarterSection(2)">النصف (3)</button>
+            <button class="q-jump-btn" onclick="jumpToQuarterSection(3)">الربع 4</button>
           </div>
         </div>
 
@@ -1032,80 +768,91 @@
           </div>
           <div class="btn-row" style="margin-top:6px;">
             <button class="btn btn-gold" style="flex:1;" onclick="playMushafSurahFull()">🔊 استماع للسورة (قارئ مغاربي)</button>
-            <button class="btn btn-primary" onclick="startContinuousMushafAudio()">▶ تلاوة متزامنة بالآية</button>
+            <button class="btn btn-primary" onclick="startContinuousMushafAudio()">▶ تلاوة بالآية</button>
             <button class="btn btn-outline" onclick="saveMushafBookmark()">🔖 حفظ</button>
           </div>
           <audio id="mushafSurahAudio" controls style="width:100%;margin-top:9px;display:none;"></audio>
         </div>
 
-        <!-- MUSHAF APPEARANCE TOOLBAR -->
-        <div class="mushaf-toolbar" style="margin-top:12px;">
-          <div class="tool-group">
-            <button class="tool-chip" onclick="changeFontSize(-2)">أ-</button>
-            <button class="tool-chip" onclick="changeFontSize(2)">أ+</button>
-            <button class="tool-chip" id="hideTextBtn" onclick="toggleHideMode()">👁️ تسميع</button>
+        <!-- MODE C: QURAN SEARCH -->
+        <div id="mushafSearchControls" style="display:none;">
+          <div style="display:flex;gap:7px;">
+            <input type="text" id="quranSearchInput" placeholder="اكتب كلمة أو جزءاً من آية للبحث في القرآن..." onkeydown="if(event.key==='Enter') runQuranSearch()" />
+            <button class="btn btn-primary" onclick="runQuranSearch()">بحث</button>
           </div>
-          <div class="tool-group">
-            <button class="tool-chip active" id="paper-classic" onclick="setPaper('classic')">كريمي</button>
-            <button class="tool-chip" id="paper-sepia" onclick="setPaper('sepia')">ورقي</button>
-            <button class="tool-chip" id="paper-night" onclick="setPaper('night')">ليلي</button>
-          </div>
+          <div id="quranSearchResults" style="margin-top:10px;"></div>
         </div>
 
-        <!-- MAGHREBI HIZB RATIB OPENING RITUAL -->
-        <div class="ratib-ritual-box" id="ratibIntroBox">
-          <div class="ratib-ritual-title">
-            <span>🌙 افتتاح الحزب الراتب بالصيغة المغاربية</span>
-            <span class="pill-badge">قبل القراءة</span>
+        <!-- MUSHAF APPEARANCE & READING TOOLS -->
+        <div id="mushafReaderArea">
+          <div class="mushaf-toolbar">
+            <div class="tool-group">
+              <button class="tool-chip" onclick="changeFontSize(-2)">أ-</button>
+              <button class="tool-chip" onclick="changeFontSize(2)">أ+</button>
+              <button class="tool-chip" id="hideTextBtn" onclick="toggleHideMode()">👁️ تسميع</button>
+              <button class="tool-chip" id="tafsirTapBtn" onclick="toggleQuickTafsirMode()">💡 تفسير</button>
+              <button class="tool-chip" id="autoScrollBtn" onclick="cycleAutoScroll()">📜 تمرير</button>
+            </div>
+            <div class="tool-group">
+              <button class="tool-chip active" id="paper-classic" onclick="setPaper('classic')">كريمي</button>
+              <button class="tool-chip" id="paper-sepia" onclick="setPaper('sepia')">ورقي</button>
+              <button class="tool-chip" id="paper-night" onclick="setPaper('night')">ليلي</button>
+            </div>
           </div>
-          <p class="ratib-dua-text" style="font-size:17.5px;">
-            أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ ۞ بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۞ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ... (يُستحب استحضار النية والخشوع والترتيل بتمهل واتزان على طريقة الحزب الراتب في مساجد المغرب العربي).
-          </p>
-        </div>
 
-        <!-- AUTHENTIC AL-MUSHAF AL-MUHAMMADI FRAME -->
-        <div class="muhammadi-frame paper-classic" id="muhammadiFrame">
-          <div class="muhammadi-banner">
-            <div class="title" id="muhammadiTitle">۞ الحزب 1 — المصحف المحمدي ۞</div>
-            <div class="meta" id="muhammadiMeta">رواية ورش عن نافع من طريق الأزرق • الرسم العثماني المغاربي والوقف الهبطي (ص)</div>
+          <!-- MAGHREBI HIZB RATIB OPENING RITUAL -->
+          <div class="ratib-ritual-box" id="ratibIntroBox">
+            <div class="ratib-ritual-title">
+              <span>🌙 افتتاح الحزب الراتب بالصيغة المغاربية</span>
+              <span class="pill-badge">قبل القراءة</span>
+            </div>
+            <p class="ratib-dua-text" style="font-size:17.5px;">
+              أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ ۞ بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۞ يُقرأ الحزب بتمهل واتزان على طريقة مساجد المغرب العربي، مع مراعاة الوقف الهبطي (ص) وأحكام رواية ورش من طريق الأزرق.
+            </p>
           </div>
-          <div class="ayah-block" id="muhammadiContent">
-            جاري تحميل المصحف المحمدي برواية ورش عن نافع...
-          </div>
-        </div>
 
-        <!-- MAGHREBI HIZB RATIB CLOSING DUA -->
-        <div class="ratib-ritual-box" id="ratibDuaBox" style="margin-top:12px;">
-          <div class="ratib-ritual-title">
-            <span>🤲 دعاء ختم الحزب الراتب (الصيغة المغاربية)</span>
-            <span class="pill-badge">بعد إتمام الحزب</span>
+          <!-- AUTHENTIC AL-MUSHAF AL-MUHAMMADI FRAME -->
+          <div class="muhammadi-frame paper-classic" id="muhammadiFrame">
+            <div class="muhammadi-banner">
+              <div class="title" id="muhammadiTitle">۞ الحزب 1 — المصحف المحمدي ۞</div>
+              <div class="meta" id="muhammadiMeta">رواية ورش عن نافع من طريق الأزرق • الرسم العثماني المغاربي والوقف الهبطي (ص)</div>
+            </div>
+            <div class="ayah-block" id="muhammadiContent">
+              جاري تحميل المصحف المحمدي برواية ورش عن نافع...
+            </div>
           </div>
-          <p class="ratib-dua-text">
-            صَدَقَ اللَّهُ الْعَظِيمُ، وَبَلَّغَ رَسُولُهُ الْكَرِيمُ، وَنَحْنُ عَلَىٰ ذَٰلِكَ مِنَ الشَّاهِدِينَ. اللَّهُمَّ انْفَعْنَا وَارْفَعْنَا بِالْقُرْآنِ الْعَظِيمِ، وَاجْعَلْهُ لَنَا إِمَاماً وَنُوراً وَهُدًى وَرَحْمَةً، اللَّهُمَّ ذَكِّرْنَا مِنْهُ مَا نَسِينَا، وَعَلِّمْنَا مِنْهُ مَا جَهِلْنَا، وَارْزُقْنَا تِلَاوَتَهُ آنَاءَ اللَّيْلِ وَأَطْرَافَ النَّهَارِ عَلَى الْوَجْهِ الَّذِي يُرْضِيكَ عَنَّا. سُبْحَانَ رَبِّكَ رَبِّ الْعِزَّةِ عَمَّا يَصِفُونَ، وَسَلَامٌ عَلَى الْمُرْسَلِينَ، وَالْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ.
-          </p>
-          <div class="btn-row">
-            <button class="btn btn-success" style="width:100%;" id="markHizbDoneBtn" onclick="markCurrentHizbRatibDone()">✓ أتممت قراءة هذا الحزب الراتب</button>
-          </div>
-        </div>
 
-        <!-- INFO ABOUT MUHAMMADI MUSHAF -->
-        <details class="info-box">
-          <summary>ℹ️ عن المصحف المحمدي والوقف الهبطي (ص) والحزب الراتب</summary>
-          <div style="margin-top:8px;">
-            • <strong>رواية ورش عن نافع من طريق الأزرق:</strong> الرواية المعتمدة في الجزائر والمغرب وشمال أفريقيا.<br/>
-            • <strong>الوقف الهبطي (ص):</strong> علامة الوقف التي وضعها الإمام محمد بن أبي جمعة الهبطي للتيسير على القارئ في الحزب الراتب والقراءة الجماعية.<br/>
-            • <strong>تقسيم الأحزاب (60 حزباً):</strong> يُقرأ حزبان كل يوم (حزب بعد الصبح وحزب بعد المغرب) فينختم القرآن الكريم كاملاً كل شهر.<br/>
-            • <strong>وضع التسميع (👁️):</strong> يخفي الآيات لتختبر حفظك، وعند النقر على أي آية تنكشف فوراً.
+          <!-- MAGHREBI HIZB RATIB CLOSING DUA -->
+          <div class="ratib-ritual-box" id="ratibDuaBox" style="margin-top:12px;">
+            <div class="ratib-ritual-title">
+              <span>🤲 دعاء ختم الحزب الراتب (الصيغة المغاربية)</span>
+              <span class="pill-badge">بعد إتمام الحزب</span>
+            </div>
+            <p class="ratib-dua-text">
+              صَدَقَ اللَّهُ الْعَظِيمُ، وَبَلَّغَ رَسُولُهُ الْكَرِيمُ، وَنَحْنُ عَلَىٰ ذَٰلِكَ مِنَ الشَّاهِدِينَ. اللَّهُمَّ انْفَعْنَا وَارْفَعْنَا بِالْقُرْآنِ الْعَظِيمِ، وَاجْعَلْهُ لَنَا إِمَاماً وَنُوراً وَهُدًى وَرَحْمَةً، اللَّهُمَّ ذَكِّرْنَا مِنْهُ مَا نَسِينَا، وَعَلِّمْنَا مِنْهُ مَا جَهِلْنَا، وَارْزُقْنَا تِلَاوَتَهُ آنَاءَ اللَّيْلِ وَأَطْرَافَ النَّهَارِ عَلَى الْوَجْهِ الَّذِي يُرْضِيكَ عَنَّا. سُبْحَانَ رَبِّكَ رَبِّ الْعِزَّةِ عَمَّا يَصِفُونَ، وَسَلَامٌ عَلَى الْمُرْسَلِينَ، وَالْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ.
+            </p>
+            <div class="btn-row">
+              <button class="btn btn-success" style="width:100%;" onclick="markCurrentHizbRatibDone()">✓ أتممت قراءة هذا الحزب الراتب</button>
+            </div>
           </div>
-        </details>
+
+          <details class="info-box">
+            <summary>ℹ️ دليل استخدام أدوات المصحف المحمدي</summary>
+            <div style="margin-top:8px;">
+              • <strong>النقر على أي آية:</strong> يبدأ التلاوة منها مباشرة، أو يعرض التفسير الميسر عند تفعيل زر <strong>«💡 تفسير»</strong>، أو يكشف الآية في وضع <strong>«👁️ تسميع»</strong>.<br/>
+              • <strong>التمرير التلقائي (📜):</strong> يحرّك النص تلقائياً بهدوء أثناء القراءة الراتبة أو التدوير بثلاث سرعات مختلفة.<br/>
+              • <strong>الوقف الهبطي (ص):</strong> علامة الوقف المغاربية المعتمدة في الحزب الراتب لتوحيد الوقف والابتداء.
+            </div>
+          </details>
+        </div>
       </div>
     </section>
 
-    <!-- ==================== TAB 3: TALQEEN & REPETITION ==================== -->
+    <!-- ==================== TAB 3: TALQEEN & CUMULATIVE CHAINING ==================== -->
     <section id="view-talqeen" class="view">
       <div class="card">
         <div class="card-head">
-          <div class="card-title"><span>🎧</span><h3>مصحف التلقين والتكرار (ربع حزب)</h3></div>
+          <div class="card-title"><span>🎧</span><h3>مصحف التلقين والربط التراكمي</h3></div>
           <span class="pill-badge">ورش • الوقف الهبطي (ص)</span>
         </div>
 
@@ -1121,6 +868,18 @@
               <option value="warsh_ibrahim_aldosary_128kbps">الشيخ إبراهيم الدوسري (ورش)</option>
               <option value="warsh_Abdul_Basit_128kbps">الشيخ عبد الباسط (ورش)</option>
             </select>
+          </div>
+        </div>
+
+        <!-- Ayah Range Selector inside Quarter -->
+        <div class="grid-2" style="margin-bottom:9px;">
+          <div class="field">
+            <label>نطاق التلقين: من الآية (داخل الربع)</label>
+            <select id="rangeStartSelect" onchange="highlightTalqeenRange()"></select>
+          </div>
+          <div class="field">
+            <label>إلى الآية (داخل الربع)</label>
+            <select id="rangeEndSelect" onchange="highlightTalqeenRange()"></select>
           </div>
         </div>
 
@@ -1146,10 +905,25 @@
           </div>
         </div>
 
+        <!-- Cumulative Chaining (Rabt) Toggle -->
+        <label class="switch-row">
+          <div>
+            <div class="label-main">🔗 تفعيل الربط التراكمي (التثبيت المتقن)</div>
+            <div class="label-sub">بعد تكرار كل آية جديدة، يُعيد ربطها بما قبلها في النطاق تلقائياً</div>
+          </div>
+          <input type="checkbox" id="rabtToggle" />
+        </label>
+
         <div class="btn-row">
           <button class="btn btn-primary" onclick="loadQuarter()">تحميل الربع</button>
-          <button class="btn btn-gold" onclick="startTalqeen()">▶ بدء التلقين والتكرار</button>
+          <button class="btn btn-gold" onclick="startTalqeen()">▶ بدء التلقين والربط</button>
           <button class="btn btn-outline" onclick="stopAllAudio()">⏹ إيقاف</button>
+        </div>
+
+        <!-- Live Talqeen Phase & Countdown Indicator -->
+        <div class="talqeen-status-bar" id="talqeenStatusBar">
+          <span id="talqeenPhaseText">🎧 استمع للشيخ...</span>
+          <span class="pill-badge" id="talqeenCounterBadge">1 / 3</span>
         </div>
 
         <!-- Maghrebi Full-Surah Listening Bar -->
@@ -1170,7 +944,7 @@
         <div class="muhammadi-frame paper-classic" id="talqeenFrame">
           <div class="muhammadi-banner">
             <div class="title" id="mushafHeader">المصحف المحمدي — تلقين ربع الحزب</div>
-            <div class="meta">انقر على أي آية لبدء التلقين والتكرار منها مباشرة</div>
+            <div class="meta">انقر على أي آية لبدء التلقين منها مباشرة</div>
           </div>
           <div class="ayah-block" id="mushafText">اضغط على «تحميل الربع» لعرض الآيات الكريمة بالرسم العثماني المغاربي والوقف الهبطي (ص)...</div>
         </div>
@@ -1213,6 +987,67 @@
       </div>
     </section>
   </main>
+
+  <!-- Quick Tafsir Bottom Sheet -->
+  <div class="modal-backdrop" id="tafsirModal" onclick="if(event.target===this) closeModal('tafsirModal')">
+    <div class="bottom-sheet">
+      <div class="sheet-head">
+        <h3 id="modalTafsirTitle">💡 التفسير الميسر</h3>
+        <button class="sheet-close" onclick="closeModal('tafsirModal')">✕</button>
+      </div>
+      <div id="modalTafsirBody">جاري تحميل التفسير...</div>
+      <div class="btn-row" style="margin-top:14px;">
+        <button class="btn btn-gold" style="flex:1;" id="modalAddJournalBtn">✍️ أضف لدفتر التدبر</button>
+        <button class="btn btn-outline" onclick="closeModal('tafsirModal')">إغلاق</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings & Backup Bottom Sheet -->
+  <div class="modal-backdrop" id="settingsModal" onclick="if(event.target===this) closeModal('settingsModal')">
+    <div class="bottom-sheet">
+      <div class="sheet-head">
+        <h3>⚙️ الإعدادات والنسخ الاحتياطي</h3>
+        <button class="sheet-close" onclick="closeModal('settingsModal')">✕</button>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-box">
+          <div class="stat-num" id="statDays">0/30</div>
+          <div class="stat-lbl">أيام مكتملة</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" id="statQuarters">0%</div>
+          <div class="stat-lbl">إتقان الختمة</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" id="statNotes">0</div>
+          <div class="stat-lbl">فوائد التدبر</div>
+        </div>
+      </div>
+
+      <div class="field" style="margin-bottom:10px;">
+        <label>نقطة بداية الحزب الراتب (اليوم 1 يبدأ من الحزب):</label>
+        <input type="number" id="settingRatibStart" min="1" max="60" value="1" />
+      </div>
+
+      <div class="field" style="margin-bottom:10px;">
+        <label>نقطة بداية ورد التدبر (رقم الآية في المصحف من 1 إلى 6236):</label>
+        <input type="number" id="settingTadabburStart" min="1" max="6236" value="1" />
+      </div>
+
+      <button class="btn btn-primary" style="width:100%;margin-bottom:14px;" onclick="saveProgramSettings()">حفظ إعدادات البرنامج ✓</button>
+
+      <div style="border-top:1px dashed var(--border);padding-top:12px;">
+        <div style="font-size:12.5px;font-weight:800;margin-bottom:8px;">💾 حفظ واستعادة بياناتك (التقدم + خريطة الختمة + دفتر التدبر):</div>
+        <div class="grid-2">
+          <button class="btn btn-gold" onclick="exportBackupJSON()">تصدير نسخة (JSON) ⬇️</button>
+          <button class="btn btn-outline" onclick="document.getElementById('backupFileInput').click()">استيراد نسخة ⬆️</button>
+        </div>
+        <input type="file" id="backupFileInput" accept=".json,application/json" style="display:none;" onchange="importBackupJSON(event)" />
+      </div>
+    </div>
+  </div>
 
   <!-- Sticky Unified Mini Audio Player -->
   <div class="mini-player" id="miniPlayer">
@@ -1268,7 +1103,7 @@
       "المسد","الإخلاص","الفلق","الناس"
     ];
 
-    // --- STATE & STORAGE ---
+    // --- STATE & STORAGE (100% compatible with v1/v2) ---
     const STORAGE_KEY = 'mihrab_alhuffaz_warsh_v1';
     let state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
     if (!state.currentDay) state.currentDay = 1;
@@ -1279,6 +1114,8 @@
     if (!state.fontSize) state.fontSize = 27;
     if (!state.paper) state.paper = 'classic';
     if (!state.bookmark) state.bookmark = { mode: 'ratib', value: 1 };
+    if (!state.ratibStartHizb) state.ratibStartHizb = 1;
+    if (!state.tadabburStartAyah) state.tadabburStartAyah = 1;
 
     function saveState() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -1289,10 +1126,72 @@
       t.textContent = msg;
       t.classList.add('show');
       clearTimeout(window._toastTimer);
-      window._toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+      window._toastTimer = setTimeout(() => t.classList.remove('show'), 2900);
     }
 
     function pad3(n) { return String(n).padStart(3, '0'); }
+
+    // --- MODALS ---
+    function openModal(id) { document.getElementById(id).classList.add('open'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+    function openSettingsModal() {
+      let doneDays = 0;
+      for (let i = 1; i <= 30; i++) if (isDayComplete(i)) doneDays++;
+      let mastered = 0;
+      for (let q = 1; q <= 240; q++) if (state.quarters[q] === 2) mastered++;
+      document.getElementById('statDays').textContent = `${doneDays}/30`;
+      document.getElementById('statQuarters').textContent = Math.round((mastered / 240) * 100) + '%';
+      document.getElementById('statNotes').textContent = state.notes.length;
+      document.getElementById('settingRatibStart').value = state.ratibStartHizb || 1;
+      document.getElementById('settingTadabburStart').value = state.tadabburStartAyah || 1;
+      openModal('settingsModal');
+    }
+
+    function saveProgramSettings() {
+      const rStart = Math.max(1, Math.min(60, parseInt(document.getElementById('settingRatibStart').value || '1', 10)));
+      const tStart = Math.max(1, Math.min(6236, parseInt(document.getElementById('settingTadabburStart').value || '1', 10)));
+      state.ratibStartHizb = rStart;
+      state.tadabburStartAyah = tStart;
+      saveState();
+      renderDashboard();
+      closeModal('settingsModal');
+      showToast('تم حفظ إعدادات البرنامج بنجاح ✓');
+    }
+
+    function exportBackupJSON() {
+      const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `mihrab_backup_${new Date().toISOString().slice(0,10)}.json`;
+      a.click();
+      showToast('تم تنزيل النسخة الاحتياطية 💾');
+    }
+
+    function importBackupJSON(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const parsed = JSON.parse(e.target.result);
+          if (typeof parsed !== 'object' || !parsed) throw new Error('invalid');
+          state = { ...state, ...parsed };
+          saveState();
+          applyPrefs();
+          renderDayStrip();
+          renderDashboard();
+          renderHizbGrid();
+          renderNotes();
+          closeModal('settingsModal');
+          showToast('تمت استعادة النسخة الاحتياطية بنجاح ✓');
+        } catch (err) {
+          showToast('ملف النسخة الاحتياطية غير صالح');
+        }
+      };
+      reader.readAsText(file);
+      event.target.value = '';
+    }
 
     // --- THEME & MUSHAF PREFERENCES ---
     function applyPrefs() {
@@ -1332,20 +1231,62 @@
     }
 
     let hideMode = false;
+    let quickTafsirMode = false;
+    let autoScrollLevel = 0; // 0: off, 1: slow, 2: medium, 3: tadweer
+    let autoScrollTimer = null;
+
     function toggleHideMode() {
       hideMode = !hideMode;
+      if (hideMode && quickTafsirMode) toggleQuickTafsirMode();
       document.getElementById('muhammadiFrame').classList.toggle('mushaf-hidden', hideMode);
       document.getElementById('hideTextBtn').classList.toggle('active', hideMode);
       if (hideMode) showToast('وضع التسميع مُفعّل — انقر على الآية لكشفها 👁️');
     }
 
+    function toggleQuickTafsirMode() {
+      quickTafsirMode = !quickTafsirMode;
+      if (quickTafsirMode && hideMode) toggleHideMode();
+      document.getElementById('tafsirTapBtn').classList.toggle('active', quickTafsirMode);
+      if (quickTafsirMode) showToast('وضع التفسير السريع مُفعّل — انقر على أي آية لعرض تفسيرها 💡');
+    }
+
+    function stopAutoScroll() {
+      autoScrollLevel = 0;
+      clearInterval(autoScrollTimer);
+      autoScrollTimer = null;
+      const btn = document.getElementById('autoScrollBtn');
+      if (btn) {
+        btn.classList.remove('active');
+        btn.textContent = '📜 تمرير';
+      }
+    }
+
+    function cycleAutoScroll() {
+      clearInterval(autoScrollTimer);
+      autoScrollLevel = (autoScrollLevel + 1) % 4;
+      const btn = document.getElementById('autoScrollBtn');
+      const labels = ['📜 تمرير', '📜 بطيء', '📜 متوسط', '📜 تدوير'];
+      const delays = [0, 75, 45, 25];
+      btn.textContent = labels[autoScrollLevel];
+      btn.classList.toggle('active', autoScrollLevel > 0);
+      if (autoScrollLevel === 0) {
+        showToast('تم إيقاف التمرير التلقائي');
+        return;
+      }
+      showToast(`التمرير التلقائي: ${labels[autoScrollLevel].replace('📜 ', '')}`);
+      autoScrollTimer = setInterval(() => {
+        window.scrollBy({ top: 1, behavior: 'auto' });
+      }, delays[autoScrollLevel]);
+    }
+
     // --- NAVIGATION ---
     function switchTab(tab) {
+      stopAutoScroll();
       document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
       document.getElementById('view-' + tab).classList.add('active');
       document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      if (tab === 'mushaf' && mushafAyahs.length === 0) {
+      if (tab === 'mushaf' && mushafAyahs.length === 0 && mushafMode !== 'search') {
         loadMushafHizb(getDayHizbs().h1);
       }
       if (tab === 'talqeen' && talqeenAyahs.length === 0) loadQuarter();
@@ -1357,8 +1298,10 @@
     const PRAYERS = ['الفجر', 'الظهر', 'العصر', 'المغرب', 'العشاء'];
 
     function getDayHizbs() {
-      const h1 = (state.currentDay - 1) * 2 + 1;
-      return { h1, h2: h1 + 1 };
+      const base = (state.ratibStartHizb || 1) - 1;
+      const h1 = ((base + (state.currentDay - 1) * 2) % 60) + 1;
+      const h2 = ((base + (state.currentDay - 1) * 2 + 1) % 60) + 1;
+      return { h1, h2 };
     }
 
     function getDayData(day) {
@@ -1397,18 +1340,15 @@
 
       document.getElementById('dayTitle').textContent = `اليوم ${day} من الدورة الشهرية`;
 
-      // Pillar 1: 2 Hizbs Ratib
       const { h1, h2 } = getDayHizbs();
       document.getElementById('ratibBadge').textContent = `حزب ${h1} و ${h2}`;
       document.getElementById('ratibLabel1').textContent = `حزب الصبح (بعد الفجر) — الحزب ${h1}`;
       document.getElementById('ratibLabel2').textContent = `حزب المساء (بعد المغرب) — الحزب ${h2}`;
 
-      // Pillar 2: 1 Quarter Talqeen
       document.getElementById('talqeenBadge').textContent = `الربع ${day}`;
-      document.getElementById('talqeenLabel').textContent = `تثبيت الربع ${day} بالتلقين والتكرار`;
+      document.getElementById('talqeenLabel').textContent = `تثبيت الربع ${day} بالتلقين والربط`;
       document.getElementById('quarterInput').value = day;
 
-      // Pillar 3: 5 Hizbs Tadweer (12-day cycle)
       const tStart = (((day - 1) * 5) % 60) + 1;
       const tEnd = tStart + 4;
       document.getElementById('tadweerBadge').textContent = `أحزاب ${tStart} إلى ${tEnd}`;
@@ -1427,13 +1367,12 @@
         tWrap.appendChild(div);
       }
 
-      // Pillar 4: 7 Ayahs Tafsir
-      const aStart = (day - 1) * 7 + 1;
-      const aEnd = aStart + 6;
-      document.getElementById('tadabburBadge').textContent = `الآيات ${aStart}–${aEnd}`;
+      const aBase = (state.tadabburStartAyah || 1);
+      const aStart = ((aBase - 1 + (day - 1) * 7) % 6236) + 1;
+      const aEnd = ((aStart - 1 + 6) % 6236) + 1;
+      document.getElementById('tadabburBadge').textContent = `آيات ${aStart}–${aEnd}`;
       document.getElementById('tafsirContainer').innerHTML = '';
 
-      // Bind static check-items
       document.querySelectorAll('#view-daily .check-item[data-task]').forEach(el => {
         const k = el.dataset.task;
         el.classList.toggle('checked', !!d[k]);
@@ -1461,9 +1400,7 @@
       document.getElementById('progressRing').style.strokeDashoffset = circ - (circ * pct / 100);
 
       let streak = 0;
-      for (let i = 1; i <= 30; i++) {
-        if (isDayComplete(i)) streak++;
-      }
+      for (let i = 1; i <= 30; i++) if (isDayComplete(i)) streak++;
       document.getElementById('streakCount').textContent = streak;
     }
 
@@ -1538,26 +1475,29 @@
       });
     }
 
-    // --- AL-MUSHAF AL-MUHAMMADI & MAGHREBI HIZB RATIB ENGINE ---
-    let mushafMode = 'ratib'; // 'ratib' | 'surah'
+    // --- AL-MUSHAF AL-MUHAMMADI & MAGHREBI HIZB RATIB ---
+    let mushafMode = 'ratib'; // 'ratib' | 'surah' | 'search'
     let currentMushafHizb = 1;
     let currentMushafSurah = 1;
     let mushafAyahs = [];
 
     function setMushafMode(mode) {
+      stopAutoScroll();
       mushafMode = mode;
       document.getElementById('modeRatibBtn').classList.toggle('active', mode === 'ratib');
       document.getElementById('modeSurahBtn').classList.toggle('active', mode === 'surah');
+      document.getElementById('modeSearchBtn').classList.toggle('active', mode === 'search');
+
       document.getElementById('mushafRatibControls').style.display = mode === 'ratib' ? 'block' : 'none';
       document.getElementById('mushafSurahControls').style.display = mode === 'surah' ? 'block' : 'none';
+      document.getElementById('mushafSearchControls').style.display = mode === 'search' ? 'block' : 'none';
+      document.getElementById('mushafReaderArea').style.display = mode === 'search' ? 'none' : 'block';
+
       document.getElementById('ratibIntroBox').style.display = mode === 'ratib' ? 'block' : 'none';
       document.getElementById('ratibDuaBox').style.display = mode === 'ratib' ? 'block' : 'none';
 
-      if (mode === 'ratib') {
-        loadMushafHizb(currentMushafHizb);
-      } else {
-        loadMushafSurah(currentMushafSurah);
-      }
+      if (mode === 'ratib') loadMushafHizb(currentMushafHizb);
+      else if (mode === 'surah') loadMushafSurah(currentMushafSurah);
     }
 
     function openHizbInMushaf(hizbNum, context) {
@@ -1569,10 +1509,21 @@
       else if (context === 'evening') showToast(`حزب المساء (بعد المغرب) — الحزب ${currentMushafHizb} 🌇`);
     }
 
+    function openSurahInMushaf(surahNum) {
+      currentMushafSurah = Math.max(1, Math.min(114, parseInt(surahNum, 10) || 1));
+      switchTab('mushaf');
+      setMushafMode('surah');
+    }
+
     function stepHizb(delta) {
       const next = Math.max(1, Math.min(60, currentMushafHizb + delta));
       document.getElementById('hizbSelect').value = next;
       loadMushafHizb(next);
+    }
+
+    function jumpToQuarterSection(qIdx) {
+      const el = document.getElementById('hizb-q-div-' + qIdx);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     async function fetchQuarterData(q) {
@@ -1597,7 +1548,7 @@
       const dayNum = Math.ceil(currentMushafHizb / 2);
       const periodText = currentMushafHizb % 2 === 1 ? 'حزب الصبح (بعد الفجر)' : 'حزب المساء (بعد المغرب)';
       titleEl.textContent = `۞ الحزب ${currentMushafHizb} — ${periodText} ۞`;
-      metaEl.textContent = `المصحف المحمدي • رواية ورش عن نافع من طريق الأزرق • الوقف الهبطي (ص)`;
+      metaEl.textContent = 'المصحف المحمدي • رواية ورش عن نافع من طريق الأزرق • الوقف الهبطي (ص)';
       contentEl.innerHTML = '<div style="text-align:center;padding:24px;font-family:Cairo,sans-serif;font-size:14px;">جاري تحميل الحزب كاملاً (4 أرباع) برواية ورش...</div>';
 
       const baseQ = (currentMushafHizb - 1) * 4 + 1;
@@ -1621,7 +1572,7 @@
         let lastSurahNum = -1;
 
         quartersAyahs.forEach((qList, qIdx) => {
-          html += `<div class="quarter-divider">${quarterLabels[qIdx]}</div>`;
+          html += `<div class="quarter-divider" id="hizb-q-div-${qIdx}">${quarterLabels[qIdx]}</div>`;
           qList.forEach(a => {
             const globalIdx = mushafAyahs.length;
             mushafAyahs.push(a);
@@ -1684,16 +1635,78 @@
       }
     }
 
+    async function runQuranSearch() {
+      const q = (document.getElementById('quranSearchInput').value || '').trim();
+      const box = document.getElementById('quranSearchResults');
+      if (q.length < 2) return showToast('اكتب كلمتين أو أكثر للبحث');
+      box.innerHTML = '<div style="font-size:13px;color:var(--muted);padding:10px;">جاري البحث في القرآن الكريم...</div>';
+      try {
+        const res = await fetch(`https://api.alquran.cloud/v1/search/${encodeURIComponent(q)}/all/ar`);
+        const json = await res.json();
+        if (json.code !== 200 || !json.data || !json.data.matches || !json.data.matches.length) {
+          box.innerHTML = '<div style="font-size:13px;color:var(--muted);padding:10px;">لم يتم العثور على نتائج مطابقة. جرب كتابة الكلمة بدون تشكيل.</div>';
+          return;
+        }
+        const matches = json.data.matches.slice(0, 25);
+        box.innerHTML = `<div style="font-size:12px;color:var(--muted);margin-bottom:8px;">عُثر على ${json.data.count} نتيجة (عرض أول ${matches.length}):</div>` +
+          matches.map(m => `
+            <div class="search-item">
+              <div style="font-family:'Scheherazade New',serif;font-size:21px;line-height:1.9;">${m.text}</div>
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px;">
+                <span class="pill-badge">${m.surah.name} — الآية ${m.numberInSurah}</span>
+                <button class="mini-action-btn" onclick="openSurahInMushaf(${m.surah.number})">فتح السورة 📖</button>
+              </div>
+            </div>
+          `).join('');
+      } catch (e) {
+        box.innerHTML = '<div style="font-size:13px;color:var(--danger);">تعذر البحث. تحقق من الاتصال بالإنترنت.</div>';
+      }
+    }
+
+    async function openQuickTafsirForAyah(ayahObj) {
+      document.getElementById('modalTafsirTitle').textContent = `💡 ${ayahObj.surah.name} — الآية ${ayahObj.numberInSurah}`;
+      document.getElementById('modalTafsirBody').innerHTML = `
+        <div class="tafsir-ayah">${formatHabti(ayahObj.text)}</div>
+        <div style="font-size:13px;color:var(--muted);">جاري جلب التفسير الميسر...</div>
+      `;
+      document.getElementById('modalAddJournalBtn').onclick = () => {
+        closeModal('tafsirModal');
+        prefillJournalNote(`${ayahObj.surah.name} — الآية ${ayahObj.numberInSurah}`, ayahObj.text);
+      };
+      openModal('tafsirModal');
+
+      try {
+        const ref = ayahObj.number ? ayahObj.number : `${ayahObj.surah.number}:${ayahObj.numberInSurah}`;
+        const res = await fetch(`https://api.alquran.cloud/v1/ayah/${ref}/ar.muyassar`);
+        const json = await res.json();
+        const tafsirTxt = (json.code === 200 && json.data) ? json.data.text : 'تعذر جلب التفسير حالياً.';
+        document.getElementById('modalTafsirBody').innerHTML = `
+          <div class="tafsir-ayah">${formatHabti(ayahObj.text)}</div>
+          <p class="tafsir-text"><strong>التفسير الميسر:</strong> ${tafsirTxt}</p>
+        `;
+      } catch (e) {
+        document.getElementById('modalTafsirBody').innerHTML = `
+          <div class="tafsir-ayah">${formatHabti(ayahObj.text)}</div>
+          <p class="tafsir-text" style="color:var(--danger);">تعذر الاتصال بالإنترنت لجلب التفسير.</p>
+        `;
+      }
+    }
+
     function onMushafAyahTap(idx) {
       if (hideMode) {
         const el = document.getElementById('mushaf-ayah-' + idx);
         if (el) el.classList.toggle('revealed');
         return;
       }
+      if (quickTafsirMode) {
+        openQuickTafsirForAyah(mushafAyahs[idx]);
+        return;
+      }
       startContinuousMushafAudio(idx);
     }
 
     function saveMushafBookmark() {
+      if (mushafMode === 'search') return;
       state.bookmark = {
         mode: mushafMode,
         value: mushafMode === 'ratib' ? currentMushafHizb : currentMushafSurah
@@ -1732,11 +1745,8 @@
         renderDayStrip();
         showToast(`بارك الله فيك! تم تسجيل إتمام حزب المساء (الحزب ${h2}) ✓`);
       } else {
-        // Also mark its 4 quarters as reviewed (state 1) if untouched
         const baseQ = (currentMushafHizb - 1) * 4 + 1;
-        for (let i = 0; i < 4; i++) {
-          if (!state.quarters[baseQ + i]) state.quarters[baseQ + i] = 1;
-        }
+        for (let i = 0; i < 4; i++) if (!state.quarters[baseQ + i]) state.quarters[baseQ + i] = 1;
         saveState();
         showToast(`تقبل الله! تم تسجيل قراءة الحزب ${currentMushafHizb} في متتبع الختمة ✓`);
       }
@@ -1751,19 +1761,24 @@
       player.play().catch(() => showToast('اضغط على زر التشغيل في المشغل أدناه'));
     }
 
-    // --- UNIFIED AUDIO ENGINE (SUPPORTS BOTH MUSHAF HIZB RATIB & TALQEEN) ---
+    // --- UNIFIED AUDIO ENGINE (MUSHAF CONTINUOUS + ADVANCED TALQEEN WITH RABT) ---
     let activeAudioContext = null; // 'mushaf' | 'talqeen'
     let audioIdx = 0;
     let audioRep = 1;
     let isAudioPlaying = false;
     let pauseTimeout = null;
+    let countdownInt = null;
     const audioPlayer = new Audio();
+
+    // Talqeen Chaining (Rabt) state
+    let talqeenRangeStart = 0;
+    let talqeenRangeEnd = 0;
+    let inRabtPhase = false;
+    let rabtCursor = 0;
 
     function updateAudioSpeed() {
       const speed = parseFloat(document.getElementById('ratibSpeedSelect').value || '1');
-      if (activeAudioContext === 'mushaf') {
-        audioPlayer.playbackRate = speed;
-      }
+      if (activeAudioContext === 'mushaf') audioPlayer.playbackRate = speed;
     }
 
     function startContinuousMushafAudio(startIdx = 0) {
@@ -1797,20 +1812,71 @@
           `<span class="ayah-span" id="talqeen-ayah-${idx}" onclick="startTalqeen(${idx})">${formatHabti(a.text)}${sajdaBadge(a)} <span class="ayah-num">﴿${a.numberInSurah}﴾</span></span> `
         ).join('');
         document.getElementById('mushafText').innerHTML = html;
+
+        // Populate range selectors
+        const sSel = document.getElementById('rangeStartSelect');
+        const eSel = document.getElementById('rangeEndSelect');
+        sSel.innerHTML = '';
+        eSel.innerHTML = '';
+        talqeenAyahs.forEach((a, idx) => {
+          const lbl = `${a.surah.name} — آية ${a.numberInSurah}`;
+          sSel.add(new Option(lbl, idx));
+          eSel.add(new Option(lbl, idx));
+        });
+        sSel.value = 0;
+        eSel.value = talqeenAyahs.length - 1;
+        highlightTalqeenRange();
       } catch (e) {
         document.getElementById('mushafText').innerHTML = 'تعذر الاتصال بالإنترنت لتحميل الربع. تأكد من الاتصال ثم أعد المحاولة.';
       }
     }
 
-    function startTalqeen(startIdx = null) {
+    function highlightTalqeenRange() {
+      if (!talqeenAyahs.length) return;
+      let s = parseInt(document.getElementById('rangeStartSelect').value || '0', 10);
+      let e = parseInt(document.getElementById('rangeEndSelect').value || String(talqeenAyahs.length - 1), 10);
+      if (e < s) {
+        e = s;
+        document.getElementById('rangeEndSelect').value = e;
+      }
+      talqeenRangeStart = s;
+      talqeenRangeEnd = e;
+      talqeenAyahs.forEach((_, idx) => {
+        const el = document.getElementById('talqeen-ayah-' + idx);
+        if (el) el.classList.toggle('in-range', idx >= s && idx <= e);
+      });
+    }
+
+    function setTalqeenStatus(text, badge, phaseClass = '') {
+      const bar = document.getElementById('talqeenStatusBar');
+      bar.className = 'talqeen-status-bar show ' + phaseClass;
+      document.getElementById('talqeenPhaseText').textContent = text;
+      document.getElementById('talqeenCounterBadge').textContent = badge;
+    }
+
+    function startTalqeen(clickedIdx = null) {
       if (!talqeenAyahs.length) {
         loadQuarter().then(() => { if (talqeenAyahs.length) startTalqeen(0); });
         return;
       }
       stopAllAudio();
+      highlightTalqeenRange();
       activeAudioContext = 'talqeen';
-      audioIdx = startIdx !== null ? startIdx : 0;
+      if (clickedIdx !== null) {
+        audioIdx = clickedIdx;
+        if (clickedIdx < talqeenRangeStart || clickedIdx > talqeenRangeEnd) {
+          talqeenRangeStart = clickedIdx;
+          talqeenRangeEnd = talqeenAyahs.length - 1;
+          document.getElementById('rangeStartSelect').value = talqeenRangeStart;
+          document.getElementById('rangeEndSelect').value = talqeenRangeEnd;
+          highlightTalqeenRange();
+        }
+      } else {
+        audioIdx = talqeenRangeStart;
+      }
       audioRep = 1;
+      inRabtPhase = false;
+      rabtCursor = talqeenRangeStart;
       isAudioPlaying = true;
       document.getElementById('miniPlayer').classList.add('show');
       playUnifiedAyah();
@@ -1818,22 +1884,27 @@
 
     function playUnifiedAyah() {
       clearTimeout(pauseTimeout);
+      clearInterval(countdownInt);
       const list = activeAudioContext === 'mushaf' ? mushafAyahs : talqeenAyahs;
-      if (!isAudioPlaying || audioIdx >= list.length) {
+
+      const limitEnd = activeAudioContext === 'talqeen' ? talqeenRangeEnd : list.length - 1;
+      const playIdx = (activeAudioContext === 'talqeen' && inRabtPhase) ? rabtCursor : audioIdx;
+
+      if (!isAudioPlaying || playIdx > limitEnd || playIdx >= list.length) {
         const ctx = activeAudioContext;
         stopAllAudio();
-        showToast(ctx === 'mushaf' ? 'تم إتمام تلاوة الحزب بحمد الله 🌿' : 'تم إتمام تلقين الربع بحمد الله 🌿');
+        showToast(ctx === 'mushaf' ? 'تم إتمام تلاوة الحزب بحمد الله 🌿' : 'تم إتمام تلقين النطاق المحدد بحمد الله 🌿');
         return;
       }
 
-      const a = list[audioIdx];
+      const a = list[playIdx];
       const reciter = activeAudioContext === 'mushaf'
         ? document.getElementById('ratibReciterSelect').value
         : document.getElementById('reciterSelect').value;
 
       document.querySelectorAll('.ayah-span').forEach(el => el.classList.remove('active-ayah'));
       const prefix = activeAudioContext === 'mushaf' ? 'mushaf-ayah-' : 'talqeen-ayah-';
-      const activeEl = document.getElementById(prefix + audioIdx);
+      const activeEl = document.getElementById(prefix + playIdx);
       if (activeEl) {
         activeEl.classList.add('active-ayah');
         activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -1842,10 +1913,16 @@
       document.getElementById('miniTitle').textContent = `${a.surah.name} — الآية ${a.numberInSurah}`;
       if (activeAudioContext === 'talqeen') {
         const maxRep = parseInt(document.getElementById('repeatSelect').value, 10);
-        document.getElementById('miniSub').textContent = `تلقين • التكرار ${audioRep} من ${maxRep}`;
+        if (inRabtPhase) {
+          document.getElementById('miniSub').textContent = `🔗 ربط تراكمي • الآية ${a.numberInSurah}`;
+          setTalqeenStatus(`🔗 مرحلة الربط التراكمي — ربط الآية ${a.numberInSurah}`, 'ربط متصل', 'phase-rabt');
+        } else {
+          document.getElementById('miniSub').textContent = `🎧 تلقين • التكرار ${audioRep} من ${maxRep}`;
+          setTalqeenStatus(`🎧 استمع للشيخ — الآية ${a.numberInSurah}`, `${audioRep} / ${maxRep}`, '');
+        }
       } else {
         const label = mushafMode === 'ratib' ? `الحزب الراتب ${currentMushafHizb}` : `سورة ${SURAH_NAMES[currentMushafSurah - 1]}`;
-        document.getElementById('miniSub').textContent = `${label} • الآية ${audioIdx + 1} / ${list.length}`;
+        document.getElementById('miniSub').textContent = `${label} • الآية ${playIdx + 1} / ${list.length}`;
       }
       document.getElementById('miniPlayBtn').textContent = '⏸';
 
@@ -1861,24 +1938,67 @@
 
     audioPlayer.onended = () => {
       if (!isAudioPlaying) return;
+
       if (activeAudioContext === 'mushaf') {
         audioIdx++;
         playUnifiedAyah();
-      } else if (activeAudioContext === 'talqeen') {
-        const maxRep = parseInt(document.getElementById('repeatSelect').value, 10);
-        const pauseSec = parseInt(document.getElementById('pauseSelect').value, 10);
-        document.getElementById('miniSub').textContent = pauseSec > 0 ? `وقفة الترديد (${pauseSec} ثوانٍ)...` : 'الآية التالية...';
+        return;
+      }
 
-        pauseTimeout = setTimeout(() => {
-          if (!isAudioPlaying) return;
-          if (audioRep < maxRep) {
-            audioRep++;
+      // Talqeen logic with optional Cumulative Chaining (Rabt) & Live Countdown
+      const maxRep = parseInt(document.getElementById('repeatSelect').value, 10);
+      const pauseSec = parseInt(document.getElementById('pauseSelect').value, 10);
+      const useRabt = document.getElementById('rabtToggle').checked;
+
+      if (inRabtPhase) {
+        if (rabtCursor < audioIdx) {
+          rabtCursor++;
+          playUnifiedAyah();
+        } else {
+          // Finished linking up to current audioIdx; move to next ayah
+          inRabtPhase = false;
+          audioRep = 1;
+          audioIdx++;
+          playUnifiedAyah();
+        }
+        return;
+      }
+
+      const proceedAfterPause = () => {
+        clearInterval(countdownInt);
+        if (!isAudioPlaying) return;
+        if (audioRep < maxRep) {
+          audioRep++;
+          playUnifiedAyah();
+        } else {
+          // Completed repetitions for current ayah
+          if (useRabt && audioIdx > talqeenRangeStart) {
+            inRabtPhase = true;
+            // Link up to last 4 ayahs from rangeStart to audioIdx so it stays crisp and effective
+            rabtCursor = Math.max(talqeenRangeStart, audioIdx - 3);
+            playUnifiedAyah();
           } else {
             audioRep = 1;
             audioIdx++;
+            playUnifiedAyah();
           }
-          playUnifiedAyah();
-        }, pauseSec * 1000);
+        }
+      };
+
+      if (pauseSec <= 0) {
+        proceedAfterPause();
+      } else {
+        let rem = pauseSec;
+        document.getElementById('miniSub').textContent = `🗣️ دورك للترديد (${rem} ث)`;
+        setTalqeenStatus('🗣️ دورك للترديد الآن خلف الشيخ', `${rem} ثوانٍ`, 'phase-repeat');
+        countdownInt = setInterval(() => {
+          rem--;
+          if (rem > 0) {
+            document.getElementById('miniSub').textContent = `🗣️ دورك للترديد (${rem} ث)`;
+            setTalqeenStatus('🗣️ دورك للترديد الآن خلف الشيخ', `${rem} ثوانٍ`, 'phase-repeat');
+          }
+        }, 1000);
+        pauseTimeout = setTimeout(proceedAfterPause, pauseSec * 1000);
       }
     };
 
@@ -1890,13 +2010,16 @@
       } else {
         audioPlayer.pause();
         clearTimeout(pauseTimeout);
+        clearInterval(countdownInt);
         document.getElementById('miniPlayBtn').textContent = '▶';
       }
     }
 
     function nextAudioAyah() {
       const list = activeAudioContext === 'mushaf' ? mushafAyahs : talqeenAyahs;
-      if (audioIdx + 1 < list.length) {
+      const limit = activeAudioContext === 'talqeen' ? talqeenRangeEnd : list.length - 1;
+      if (audioIdx < limit) {
+        inRabtPhase = false;
         audioIdx++;
         audioRep = 1;
         playUnifiedAyah();
@@ -1904,7 +2027,9 @@
     }
 
     function prevAudioAyah() {
-      if (audioIdx > 0) {
+      const floor = activeAudioContext === 'talqeen' ? talqeenRangeStart : 0;
+      if (audioIdx > floor) {
+        inRabtPhase = false;
         audioIdx--;
         audioRep = 1;
         playUnifiedAyah();
@@ -1913,13 +2038,17 @@
 
     function stopAllAudio() {
       isAudioPlaying = false;
+      inRabtPhase = false;
       clearTimeout(pauseTimeout);
+      clearInterval(countdownInt);
       audioPlayer.pause();
       const s1 = document.getElementById('surahAudio');
       const s2 = document.getElementById('mushafSurahAudio');
       if (s1) s1.pause();
       if (s2) s2.pause();
       document.getElementById('miniPlayer').classList.remove('show');
+      const bar = document.getElementById('talqeenStatusBar');
+      if (bar) bar.classList.remove('show');
     }
 
     function playFullSurah() {
@@ -1932,25 +2061,35 @@
     }
 
     // --- 7 AYAHS TAFSIR ---
+    let loadedDailyTafsirItems = [];
+
     async function loadDailyTafsir() {
       const box = document.getElementById('tafsirContainer');
       box.innerHTML = '<div style="font-size:13px;color:var(--muted);">جاري تحميل الآيات السبع والتفسير الميسر...</div>';
-      const start = (state.currentDay - 1) * 7 + 1;
+      const aBase = (state.tadabburStartAyah || 1);
+      const start = ((aBase - 1 + (state.currentDay - 1) * 7) % 6236) + 1;
       try {
         const reqs = [];
         for (let i = 0; i < 7; i++) {
-          reqs.push(fetch(`https://api.alquran.cloud/v1/ayah/${start + i}/editions/quran-warsh,ar.muyassar`).then(r => r.json()));
+          const ayahNum = ((start - 1 + i) % 6236) + 1;
+          reqs.push(fetch(`https://api.alquran.cloud/v1/ayah/${ayahNum}/editions/quran-warsh,ar.muyassar`).then(r => r.json()));
         }
         const results = await Promise.all(reqs);
+        loadedDailyTafsirItems = [];
         let html = '';
-        results.forEach(json => {
+        results.forEach((json, idx) => {
           if (json.code === 200 && json.data && json.data.length === 2) {
             const qData = json.data[0];
             const tData = json.data[1];
+            loadedDailyTafsirItems.push({ qData, tData });
+            const itemIdx = loadedDailyTafsirItems.length - 1;
             html += `
               <div class="tafsir-item">
                 <div class="tafsir-ayah">${formatHabti(qData.text)} <span class="ayah-num">﴿${qData.numberInSurah} - ${qData.surah.name}﴾</span></div>
                 <p class="tafsir-text"><strong>التفسير الميسر:</strong> ${tData.text}</p>
+                <div style="margin-top:8px;">
+                  <button class="mini-action-btn" onclick="addDailyTafsirToJournal(${itemIdx})">✍️ تدوين فائدة في الدفتر</button>
+                </div>
               </div>
             `;
           }
@@ -1959,6 +2098,20 @@
       } catch (e) {
         box.innerHTML = '<div style="color:var(--danger);font-size:13px;">تعذر الاتصال بالإنترنت لتحميل التفسير.</div>';
       }
+    }
+
+    function addDailyTafsirToJournal(idx) {
+      const item = loadedDailyTafsirItems[idx];
+      if (!item) return;
+      prefillJournalNote(`${item.qData.surah.name} — الآية ${item.qData.numberInSurah}`, `﴿${item.qData.text}﴾\n`);
+    }
+
+    function prefillJournalNote(title, prefixBody) {
+      switchTab('journal');
+      document.getElementById('noteTitle').value = title;
+      document.getElementById('noteBody').value = prefixBody;
+      document.getElementById('noteBody').focus();
+      showToast('تم تجهيز الآية في دفتر التدبر — أضف خاطرتك واحفظها ✍️');
     }
 
     // --- 60 HIZB MATRIX ---
@@ -2033,7 +2186,7 @@
             <strong style="font-size:14px;">${n.title}</strong>
             <button onclick="deleteNote(${n.id})" style="border:none;background:none;color:var(--danger);cursor:pointer;font-size:13px;">حذف</button>
           </div>
-          <p class="tafsir-text">${n.body}</p>
+          <p class="tafsir-text" style="white-space:pre-line;">${n.body}</p>
           <div style="font-size:11px;color:var(--muted);margin-top:4px;">اليوم ${n.day} • ${n.date}</div>
         </div>
       `).join('');
