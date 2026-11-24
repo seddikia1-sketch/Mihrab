@@ -6,36 +6,80 @@
   <title>مِحراب الحُفّاظ — جاري التحميل...</title>
   <style>
     body{margin:0;font-family:system-ui,sans-serif;background:#0d3b2e;color:#f3d77c;display:flex;align-items:center;justify-content:center;min-height:100vh}
-    .box{text-align:center;padding:24px}
+    .box{text-align:center;padding:24px;max-width:420px;line-height:1.7}
   </style>
 </head>
 <body>
-  <div class="box" id="boot">جاري تحميل مِحراب الحُفّاظ...</div>
+  <div class="box" id="boot">جاري استعادة مِحراب الحُفّاظ...</div>
   <script>
-  (async function() {
+  (async function () {
+    var boot = document.getElementById('boot');
     try {
-      const n = 4;
-      for (let i = 0; i < n; i++) {
-        await new Promise((resolve, reject) => {
-          const s = document.createElement('script');
-          s.src = './payload.' + i + '.js';
-          s.onload = resolve; s.onerror = reject;
-          document.head.appendChild(s);
-        });
+      // 1) Try local gzip payloads (full app + PDF viewer)
+      try {
+        var n = 4;
+        for (var i = 0; i < n; i++) {
+          await new Promise(function (resolve, reject) {
+            var s = document.createElement('script');
+            s.src = './payload.' + i + '.js';
+            s.onload = resolve;
+            s.onerror = reject;
+            document.head.appendChild(s);
+          });
+        }
+        var b64 = (window.__MIHRAB_PAYLOAD || []).join('');
+        if (b64 && b64.length > 1000 && b64.indexOf('PLACEHOLDER') === -1) {
+          var bin = atob(b64);
+          var bytes = new Uint8Array(bin.length);
+          for (var j = 0; j < bin.length; j++) bytes[j] = bin.charCodeAt(j);
+          var ds = new DecompressionStream('gzip');
+          var stream = new Blob([bytes]).stream().pipeThrough(ds);
+          var plain = await new Response(stream).text();
+          document.open();
+          document.write(plain);
+          document.close();
+          return;
+        }
+      } catch (e1) {
+        console.warn('payload path failed', e1);
       }
-      const b64 = (window.__MIHRAB_PAYLOAD || []).join('');
-      const bin = atob(b64);
-      const bytes = new Uint8Array(bin.length);
-      for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
-      const ds = new DecompressionStream('gzip');
-      const stream = new Blob([bytes]).stream().pipeThrough(ds);
-      const plain = await new Response(stream).text();
+
+      // 2) Fallback: load last known full monolithic index from git history
+      boot.textContent = 'تحميل النسخة الكاملة من المستودع...';
+      var urls = [
+        'https://cdn.jsdelivr.net/gh/seddikia1-sketch/Mihrab@5538dc22/index.html',
+        'https://raw.githack.com/seddikia1-sketch/Mihrab/5538dc22/index.html',
+        'https://raw.githubusercontent.com/seddikia1-sketch/Mihrab/5538dc22/index.html'
+      ];
+      var html = null;
+      for (var u = 0; u < urls.length; u++) {
+        try {
+          var res = await fetch(urls[u], { cache: 'no-store' });
+          if (res.ok) {
+            html = await res.text();
+            if (html && html.indexOf('loadMushafHizb') !== -1) break;
+          }
+        } catch (e2) {}
+      }
+      if (!html) throw new Error('تعذر جلب النسخة الكاملة');
+
+      // Inject PDF.js + mushaf-pdf.js into restored HTML if missing
+      if (html.indexOf('pdf.min.js') === -1) {
+        html = html.replace(
+          '</head>',
+          '<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"><\/script>' +
+          '<script>if(window.pdfjsLib){pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";}<\/script></head>'
+        );
+      }
+      if (html.indexOf('mushaf-pdf.js') === -1) {
+        html = html.replace('</body>', '<script src="./mushaf-pdf.js"><\/script></body>');
+      }
       document.open();
-      document.write(plain);
+      document.write(html);
       document.close();
     } catch (e) {
       console.error(e);
-      document.getElementById('boot').textContent = 'تعذر التحميل: ' + e;
+      boot.innerHTML = 'تعذر التحميل.<br><a href="https://github.com/seddikia1-sketch/Mihrab" style="color:#f3d77c">فتح المستودع</a><br>' + e;
     }
   })();
   </script>
